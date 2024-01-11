@@ -1,6 +1,6 @@
 ## Team project - Power Pulse 
-## Team 6
-## Backend
+### Team 6
+### Backend
 
 
 ### Команди:
