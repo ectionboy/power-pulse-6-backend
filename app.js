@@ -4,6 +4,10 @@ const cors = require("cors");
 require("dotenv").config();
 
 const authRouter = require("./routes/api/auth");
+const foodRouter = require("./routes/api/food");
+const trainingRouter = require("./routes/api/training");
+const diaryRouter = require("./routes/api/diary");
+
 
 const app = express();
 
@@ -14,6 +18,10 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/users", authRouter);
+app.use("/food", foodRouter);
+app.use("/training", trainingRouter);
+app.use("/diary", diaryRouter);
+
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
