@@ -1,8 +1,9 @@
 const express = require("express");
-// const ctrl = require("../../controllers/training/index");
+const ctrl = require("../../controllers/training/index.js");
 const router = express.Router();
-// const { schemas } = require("../../models/training");
 
-// router.get(... , ctrl.register)
+router.get("/", ctrl.getAllExercises);
+router.get("/:exerciseId", ctrl.getExerciseById);
+router.get("/filters", ctrl.getAllFilters);
 
 module.exports = router;
