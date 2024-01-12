@@ -29,14 +29,6 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    verify: {
-      type: Boolean,
-      default: false,
-    },
-    // restorePasswordToken: {
-    //   type: String,
-    //   default: null,
-    // },
   },
   { versionKey: false, timestamps: true }
 );
