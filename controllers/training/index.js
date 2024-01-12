@@ -1,6 +1,6 @@
 const { ctrlWrapper } = require("../../helpers");
-const { getAllExercises, getExerciseById } = require("./exercises");
-const getAllFilters = require("./filters");
+const { getAllExercises, getExerciseById } = require("./exercises/exercises");
+const getAllFilters = require("./filters/filters");
 
 module.exports = {
   getAllExercises: ctrlWrapper(getAllExercises),
