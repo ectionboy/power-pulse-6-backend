@@ -2,7 +2,6 @@ const bcrypt = require("bcrypt");
 const gravatar = require("gravatar");
 
 const { User } = require("../../../models/user");
-
 const { HttpError, ctrlWrapper } = require("../../../helpers");
 
 const register = async (req, res) => {
