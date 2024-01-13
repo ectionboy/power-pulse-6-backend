@@ -2,7 +2,6 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
-// const { HttpError } = require("./helpers");
 const path = require("path");
 
 const swaggerUi = require('swagger-ui-express');
@@ -11,7 +10,7 @@ const swaggerDocument = require('./swagger.json');
 const authRouter = require("./routes/api/auth");
 const userRouter = require("./routes/api/users");
 // const foodRouter = require("./routes/api/food");
-// const trainingRouter = require("./routes/api/training");
+const trainingRouter = require("./routes/api/training");
 // const diaryRouter = require("./routes/api/diary");
 
 
