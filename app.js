@@ -14,6 +14,7 @@ const userRouter = require("./routes/api/users");
 // const trainingRouter = require("./routes/api/training");
 // const diaryRouter = require("./routes/api/diary");
 
+
 const STATIC_PATH = path.join(__dirname, "public");
 
 const app = express();
@@ -28,11 +29,10 @@ app.use(express.static(STATIC_PATH));
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 // app.use("/food", foodRouter);
-// app.use("/training", trainingRouter);
 // app.use("/diary", diaryRouter);
+app.use("/api/exercises", trainingRouter);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
