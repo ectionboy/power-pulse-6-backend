@@ -129,22 +129,30 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/RegistrationResponse"
+									"$ref": "#/components/schemas/FoodResponse"
 								}
 							}
 						}
 					},
 					"401": {
 						"description": "Unauthorized",
-						"content": {}
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedResponse"
+								}
+							}
+						}
 					},
 					"404": {
 						"description": "Not Found",
-						"content": {"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/RegistrationResponse"
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/FoodResponse404"
+								}
 							}
-						}}
+						}
 					}
 				}
 			}
@@ -162,22 +170,30 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/RegistrationResponse"
+									"$ref": "#/components/schemas/CategoriesFoodResponse"
 								}
 							}
 						}
 					},
 					"401": {
 						"description": "Unauthorized",
-						"content": {}
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedResponse"
+								}
+							}
+						}
 					},
 					"404": {
 						"description": "Not Found",
-						"content": {"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/RegistrationResponse"
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CategoriesFoodResponse404"
+								}
 							}
-						}}
+						}
 					}
 				}
 			}
@@ -234,6 +250,125 @@
 				"properties": {
 					"user": {
 						"$ref": "#/components/schemas/registrationUserSchema"
+					}
+				}
+			},
+			"FoodItemSchema": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string",
+						"description": "Id",
+						"example": "5d5169111111173622ff5773"
+					},
+					"weight": {
+						"type": "integer",
+						"description": "Weight",
+						"example": "100"
+					},
+					"calories": {
+						"type": "integer",
+						"description": "Calories",
+						"example": "340"
+					},
+					"category": {
+						"type": "integer",
+						"description": "Category",
+						"example": "dairy"
+					},
+					"title": {
+						"type": "integer",
+						"description": "Title",
+						"example": "Danbo cheese"
+					},
+					"groupBloodNotAllowed": {
+						"type": "object",
+						"properties": {
+							"1":{
+								"type":"boolean",
+								"example": "true"
+							},
+							"2":{
+								"type":"boolean",
+								"example": "true"
+							},
+							"3":{
+								"type":"boolean",
+								"example": "false"
+							},
+							"4":{
+								"type":"boolean",
+								"example": "false"
+							}
+						}
+					}
+				}
+			},
+			"FoodResponse": {
+				"type": "object",
+				"properties": {
+					"total": {
+						"type": "integer",
+						"description": "Number of foods",
+						"example": "2621"
+					},
+					"page": {
+						"type": "integer",
+						"description": "Current page",
+						"example": "1"
+					},
+					"limit": {
+						"type": "integer",
+						"description": "Current limit of elements per page",
+						"example": "1"
+					},
+					"data": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/FoodItemSchema"
+						}
+					}
+				}
+			},
+			"FoodResponse404": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"type":"string",
+						"example":"Foods not found"
+					}
+				}
+			},
+			"CategoriesFoodResponse": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string",
+						"description": "Id",
+						"example": "5d5169111111173622ff5773"
+					},
+					"label": {
+						"type": "integer",
+						"description": "Label",
+						"example": "meat"
+					}
+				}
+			},
+			"CategoriesFoodResponse404": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"type":"string",
+						"example":"Categories not found"
+					}
+				}
+			},
+			"UnauthorizedResponse": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"type":"string",
+						"example":"Unauthorized"
 					}
 				}
 			}
