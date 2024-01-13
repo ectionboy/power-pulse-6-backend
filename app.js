@@ -9,6 +9,7 @@ const authRouter = require("./routes/api/auth");
 // const foodRouter = require("./routes/api/food");
 // const trainingRouter = require("./routes/api/training");
 // const diaryRouter = require("./routes/api/diary");
+const profileRouter = require("./routes/api/profiles");
 
 const STATIC_PATH = path.join(__dirname, "public");
 
@@ -25,6 +26,7 @@ app.use("/api/auth", authRouter);
 // app.use("/food", foodRouter);
 // app.use("/training", trainingRouter);
 // app.use("/diary", diaryRouter);
+app.use("/api/profiles", profileRouter);
 
 
 app.use((req, res) => {
