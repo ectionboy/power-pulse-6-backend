@@ -1,7 +1,9 @@
-// const { ctrlWrapper } = require("../../helpers");
+const { ctrlWrapper } = require("../../helpers");
 
-// const register = require("./register/register");
+const { getAllFoods } = require("./getAllFoods/getAllFoods");
+const { getAllFoodsCategories } = require("./getAllFoodsCategories/getAllFoodsCategories");
 
 module.exports = {
-	// register: ctrlWrapper(register),
+	getAllFoods: ctrlWrapper(getAllFoods),
+	getAllFoodsCategories: ctrlWrapper(getAllFoodsCategories),
 };
