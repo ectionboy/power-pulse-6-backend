@@ -17,8 +17,18 @@ const foodSchema = new Schema(
 	},
 	{ timestamps: true, versionKey: false }
 );
+const categoriesSchema = new Schema(
+	{
+		label: String,
+	},
+	{ timestamps: true, versionKey: false }
+);
+
 const Food = model("product", foodSchema);
+const Categories = model("products-categorie", categoriesSchema);
+
 
 module.exports = {
 	Food,
+	Categories
 };
