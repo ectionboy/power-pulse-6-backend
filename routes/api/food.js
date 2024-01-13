@@ -1,8 +1,8 @@
 const express = require("express");
-// const ctrl = require("../../controllers/food/index");
+const authenticate = require("../../middlewares/authenticate.js");
+const ctrl = require("../../controllers/food/index");
 const router = express.Router();
-// const { schemas } = require("../../models/food");
 
-// router.get(... , ctrl.register)
+router.get("/", authenticate, ctrl.getAllFoods);
 
 module.exports = router;
