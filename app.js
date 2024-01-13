@@ -5,6 +5,9 @@ require("dotenv").config();
 // const { HttpError } = require("./helpers");
 const path = require("path");
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
 const authRouter = require("./routes/api/auth");
 // const foodRouter = require("./routes/api/food");
 // const trainingRouter = require("./routes/api/training");
@@ -25,6 +28,8 @@ app.use("/api/auth", authRouter);
 // app.use("/food", foodRouter);
 // app.use("/training", trainingRouter);
 // app.use("/diary", diaryRouter);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
 app.use((req, res) => {

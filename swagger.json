@@ -1,0 +1,166 @@
+{
+	"openapi": "3.0.1",
+	"info": {
+		"version": "1.1.0",
+		"title": "Team project - Power Pulse",
+		"description": "Team 6",
+		"license": {
+			"name": "MIT",
+			"url": "https://opensource.org/licenses/MIT"
+		}
+	},
+	"consumes": ["application/json", "multipart/form-data"],
+	"produces": ["application/json"],
+	"servers": [
+		{ "url": "http://localhost:3000/api" },
+		{ "url": "https://power-pulse-6-backend.onrender.com/api" }
+	],
+	"tags": [
+		{
+			"name": "Auth",
+			"description": "Authorization endpoints"
+		},
+		{
+			"name": "Diary",
+			"description": "Diary endpoints"
+		},
+		{
+			"name": "Food",
+			"description": "Food endpoints"
+		},
+		{
+			"name": "Training",
+			"description": "Training endpoints"
+		}
+	],
+
+	"paths": {
+		"/auth/register": {
+			"post": {
+				"tags": ["Auth"],
+				"summary": "User registration",
+				"parameters": [],
+				"requestBody": {
+					"description": "Registration's object",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/RegistrationRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/RegistrationResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad request (invalid request body)",
+						"content": {}
+					},
+					"409": {
+						"description": "Provided email already exists",
+						"content": {}
+					}
+				}
+			}
+		},
+    "/auth/current": {
+			"get": {
+				"tags": ["Auth"],
+				"summary": "current user information",
+				"parameters": [],
+				"security": [{ "Bearer": [] }],
+				"requestBody": {
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/RegistrationResponse"
+								}
+							}}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {}
+					}
+				}
+			}
+		}
+
+	},
+	"components": {
+		"schemas": {
+			"RegistrationRequest": {
+				"type": "object",
+				"required": ["email", "password", "name"],
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "User's name",
+						"example": "Oleks"
+					},
+					"email": {
+						"type": "string",
+						"description": "User's email",
+						"format": "email",
+						"pattern": "/^w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/"
+					},
+					"password": {
+						"type": "string",
+						"description": "User's password",
+						"minLength": "6",
+						"maxLength": "15",
+						"example": "qwerty123"
+					}
+				}
+			},
+			"registrationUserSchema": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "User's name",
+						"example": "Oleks"
+					},
+					"email": {
+						"type": "string",
+						"description": "User's email",
+						"format": "email"
+					},
+					"avatarURL": {
+						"type": "string",
+						"description": "User's avatar URL",
+						"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=250"
+					}
+				}
+			},
+			"RegistrationResponse": {
+				"type": "object",
+				"properties": {
+					"user": {
+						"$ref": "#/components/schemas/registrationUserSchema"
+					}
+				}
+			}
+		},
+		"securitySchemes": {
+			"Bearer": {
+				"type": "http",
+				"scheme": "bearer",
+				"bearerFormat": "JWT"
+			}
+		}
+	}
+}
