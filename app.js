@@ -8,7 +8,6 @@ const foodRouter = require("./routes/api/food");
 const trainingRouter = require("./routes/api/training");
 const diaryRouter = require("./routes/api/diary");
 
-
 const app = express();
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
@@ -19,9 +18,8 @@ app.use(express.json());
 
 app.use("/users", authRouter);
 app.use("/food", foodRouter);
-app.use("/training", trainingRouter);
+app.use("/api/exercises", trainingRouter);
 app.use("/diary", diaryRouter);
-
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
