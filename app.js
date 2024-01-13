@@ -9,6 +9,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
 const authRouter = require("./routes/api/auth");
+const userRouter = require("./routes/api/users");
 // const foodRouter = require("./routes/api/food");
 // const trainingRouter = require("./routes/api/training");
 // const diaryRouter = require("./routes/api/diary");
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use(express.static(STATIC_PATH));
 
 app.use("/api/auth", authRouter);
+app.use("/api/users", userRouter);
 // app.use("/food", foodRouter);
 // app.use("/training", trainingRouter);
 // app.use("/diary", diaryRouter);
