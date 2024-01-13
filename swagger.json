@@ -20,6 +20,14 @@
 			"name": "Auth",
 			"description": "Authorization endpoints"
 		},
+		        {
+            "name": "Users",
+            "description": "User's basic information"
+        },
+        {
+            "name": "Profiles",
+            "description": "User's sport profile"
+        },
 		{
 			"name": "Diary",
 			"description": "Diary endpoints"
@@ -57,7 +65,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/RegistrationResponse"
+									"$ref": "#/components/schemas/registrationResponse"
 								}
 							}
 						}
@@ -73,10 +81,48 @@
 				}
 			}
 		},
-    "/auth/current": {
+		"/auth/login": {
+			"post": {
+				"tags": ["Auth"],
+				"summary": "User login",
+				"parameters": [],
+				"requestBody": {
+					"description": "Login object",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/LoginRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/LoginResponse"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Email or password invalid",
+						"content": {}
+					},
+					"409": {
+						"description": "Provided email already exists",
+						"content": {}
+					}
+				}
+			}
+		},
+		"/auth/current": {
 			"get": {
 				"tags": ["Auth"],
-				"summary": "current user information",
+				"summary": "Current user information",
 				"parameters": [],
 				"security": [{ "Bearer": [] }],
 				"requestBody": {
@@ -87,7 +133,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/RegistrationResponse"
+									"$ref": "#/components/schemas/CurrentUserResponse"
 								}
 							}}
 					},
@@ -97,8 +143,193 @@
 					}
 				}
 			}
-		}
-
+		},
+		"/auth/logout": {
+			"post": {
+				"tags": ["Auth"],
+				"summary": "Logout user",
+				"parameters": [],
+				"security": [{ "Bearer": [] }],
+				"requestBody": {
+				},
+				"responses": {
+					"204": {
+                        "description": "No content (Operation successful)"
+                    }
+				}
+			}
+		},
+		"/users": {
+            "patch": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update user's name",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "requestBody": {
+                    "description": "User's update object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateUserRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operation successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateUserResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+		 "/users/avatars": {
+            "patch": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update user's avatar",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "requestBody": {
+                    "description": "User's avatar file",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateUserAvatarRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operation successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateUserAvatarResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+		"/profiles": {
+            "get": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "User's profile",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operation successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserProfileResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "User's profile",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "requestBody": {
+                    "description": "Profile object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserProfileRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operation successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserProfileResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+		"/profiles/targets": {
+            "get": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "User's traning targets",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operation successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserTargetsResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        }
 	},
 	"components": {
 		"schemas": {
@@ -126,7 +357,7 @@
 					}
 				}
 			},
-			"registrationUserSchema": {
+			"registrationResponse": {
 				"type": "object",
 				"properties": {
 					"name": {
@@ -135,10 +366,12 @@
 						"example": "Oleks"
 					},
 					"email": {
-						"type": "string",
-						"description": "User's email",
-						"format": "email"
-					},
+                        "type": "string",
+                        "required": true,
+                        "description": "User's email",
+                        "pattern": "/^w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/",
+                        "example": "oleks@gmail.com"
+                    },
 					"avatarURL": {
 						"type": "string",
 						"description": "User's avatar URL",
@@ -146,14 +379,295 @@
 					}
 				}
 			},
-			"RegistrationResponse": {
+			"LoginRequest": {
 				"type": "object",
+				"required": ["email", "password"],
 				"properties": {
-					"user": {
-						"$ref": "#/components/schemas/registrationUserSchema"
+					"email": {
+						"type": "string",
+						"required": true,
+						"description": "User's email",
+						"format": "email",
+						"pattern": "/^w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/",
+						"example": "oleks@gmail.com"
+					},
+					"password": {
+						"type": "string",
+						"description": "User's password",
+						"minLength": "6",
+						"maxLength": "15",
+						"example": "qwerty123"
 					}
 				}
-			}
+			},
+			"LoginResponse": {
+				"type": "object",
+				"properties": {
+                    "token": {
+                        "type": "string",
+                        "required": true,
+                        "description": "User's authentitication token"
+                    },
+                    "user": {
+                        "type": "object",
+                        "properties": { 
+                            "name": {
+                                "type": "string",
+                                "description": "User's display name",
+                                "example": "Oleks"
+                            },
+                            "email": {
+                                "type": "string",
+                                "required": true,
+                                "description": "User's email",
+                                "pattern": "/^w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/",
+                                "example": "oleks@gmail.com"
+                            },
+                            "avatarURL": {
+							"type": "string",
+							"description": "User's avatar URL",
+							"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=250"
+							},
+                            "createdAt": {
+                                "type":"string",
+                                "description": "Date of creation",
+                                "format": "date"
+                            }
+                        }
+					}
+				}
+			},
+			"CurrentUserResponse": {
+                "type": "object",
+                "properties": { 
+                            "name": {
+                                "type": "string",
+                                "description": "User's display name",
+                                "example": "Oleks"
+                            },
+                            "email": {
+                                "type": "string",
+                                "required": true,
+                                "description": "User's email",
+                                "pattern": "/^w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/",
+                                "example": "oleks@gmail.com"
+                            },
+                            "avatarURL": {
+							"type": "string",
+							"description": "User's avatar URL",
+							"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=250"
+							},
+                            "createdAt": {
+                                "type":"string",
+                                "description": "Date of creation",
+                                "format": "date"
+                            }
+                }
+            },
+			"UpdateUserRequest": {
+                "type": "object",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "User's display name"
+                    }
+                }
+            },
+			"UpdateUserResponse": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string"
+                    },
+                    "name": {
+                    	"type": "string",
+                    	"description": "User's display name",
+                        "example": "Oleks"
+                    },
+                    "email": {
+                        "type": "string",
+                        "required": true,
+                        "description": "User's email",
+                        "pattern": "/^w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/",
+                        "example": "oleks@gmail.com"
+                    },
+                    "avatarURL": {
+						"type": "string",
+						"description": "User's avatar URL",
+						"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=250"
+					}
+                }
+            },
+			"UpdateUserAvatarRequest": {
+                "type": "object",
+                "properties": {
+                    "avatar": {
+                        "type": "string",
+                        "format": "binary"
+                    }
+                }
+            },
+            "UpdateUserAvatarResponse": {
+                "type": "object",
+                "properties": {
+                    "avatarURL": {
+						"type": "string",
+						"description": "User's avatar URL",
+						"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=250"
+					}
+                }
+            },
+			"UserProfileRequest": {
+                "type": "object",
+                "required": [
+                    "height",
+                    "currentWeight",
+                    "desiredWeight",
+                    "sex",
+                    "blood",
+                    "levelActivity",
+                    "birthday"
+                ],
+                "properties": {
+                    "height": {
+                        "type": "number",
+                        "description": "User's height",
+                        "minimum": 150,
+                        "maximum": 210
+                    },
+                    "currentWeight": {
+                        "type": "number",
+                        "description": "User's weight",
+                        "minimum": 40,
+                        "maximum": 160
+                    },
+                    "desiredWeight": {
+                        "type": "number",
+                        "description": "User's target weihgt",
+                        "minimum": 40,
+                        "maximum": 160
+                    },
+                    "sex": {
+                        "type": "string",
+                        "description": "User's gender",
+                        "enum": [
+                            "male",
+                            "female"
+                        ]
+                    },
+                    "blood": {
+                        "type": "number",
+                        "description": "User's blood type",
+                        "enum": [
+                            1,
+                            2,
+                            3,
+                            4
+                        ]
+                    },
+                    "levelActivity": {
+                        "type": "number",
+                        "description": "User's blood type",
+                        "enum": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5
+                        ]
+                    },
+                    "birthday": {
+                        "type": "date",
+                        "description": "User's birthday",
+                        "format": "date"
+                    }
+                }
+            },
+			"UserProfileResponse": {
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "_id": {
+                                "type": "string"
+                            },
+                            "height": {
+                                "type": "number",
+                                "description": "User's height"
+                            },
+                            "currentWeight": {
+                                "type": "number",
+                                "description": "User's weight"
+                            },
+                            "desiredWeight": {
+                                "type": "number",
+                                "description": "User's target weihgt"
+                            },
+                            "sex": {
+                                "type": "string",
+                                "description": "User's gender",
+                                "enum": [
+                                    "male",
+                                    "female"
+                                ]
+                            },
+                            "blood": {
+                                "type": "number",
+                                "description": "User's blood type",
+                                "enum": [
+                                    1,
+                                    2,
+                                    3,
+                                    4
+                                ]
+                            },
+                            "levelActivity": {
+                                "type": "number",
+                                "description": "User's blood type",
+                                "enum": [
+                                    1,
+                                    2,
+                                    3,
+                                    4,
+                                    5
+                                ]
+                            },
+                            "birthday": {
+                                "type": "date",
+                                "description": "User's birthday",
+                                "format": "date"
+                            },
+							"bmr": {
+                                "type": "number",
+                                "description": "Callories of the user"
+                            },
+                            "owner": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/UpdateUserResponse"
+                            }
+                        }
+                    },
+                    {
+                        "type": "null"
+                    }
+                ]
+            },
+			"UserTargetsResponse": {
+                "type": "object",
+                "properties": {
+                    "targetBmr": {
+                        "type": "number",
+                        "description": "User's target callories"
+                    },
+                    "targetTime": {
+                        "type": "number",
+                        "description": "User's target traning time"
+                    }
+                }
+            }
 		},
 		"securitySchemes": {
 			"Bearer": {
@@ -161,6 +675,7 @@
 				"scheme": "bearer",
 				"bearerFormat": "JWT"
 			}
-		}
+		} 
 	}
 }
+
