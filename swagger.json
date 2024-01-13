@@ -20,6 +20,14 @@
 			"name": "Auth",
 			"description": "Authorization endpoints"
 		},
+		        {
+            "name": "Users",
+            "description": "User's basic information"
+        },
+        {
+            "name": "Profiles",
+            "description": "User's sport profile"
+        },
 		{
 			"name": "Diary",
 			"description": "Diary endpoints"
@@ -73,10 +81,48 @@
 				}
 			}
 		},
-    "/auth/current": {
+		"/auth/login": {
+			"post": {
+				"tags": ["Auth"],
+				"summary": "User login",
+				"parameters": [],
+				"requestBody": {
+					"description": "Login object",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/LoginRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/LoginResponse"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Email or password invalid",
+						"content": {}
+					},
+					"409": {
+						"description": "Provided email already exists",
+						"content": {}
+					}
+				}
+			}
+		},
+		"/auth/current": {
 			"get": {
 				"tags": ["Auth"],
-				"summary": "current user information",
+				"summary": "Current user information",
 				"parameters": [],
 				"security": [{ "Bearer": [] }],
 				"requestBody": {
@@ -87,7 +133,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/RegistrationResponse"
+									"$ref": "#/components/schemas/CurrentUserResponse"
 								}
 							}}
 					},
@@ -97,8 +143,22 @@
 					}
 				}
 			}
+		},
+		"/auth/logout": {
+			"post": {
+				"tags": ["Auth"],
+				"summary": "Logout user",
+				"parameters": [],
+				"security": [{ "Bearer": [] }],
+				"requestBody": {
+				},
+				"responses": {
+					"204": {
+                        "description": "No content (Operation successful)"
+                    }
+				}
+			}
 		}
-
 	},
 	"components": {
 		"schemas": {
@@ -126,7 +186,7 @@
 					}
 				}
 			},
-			"registrationUserSchema": {
+			"registrationResponse": {
 				"type": "object",
 				"properties": {
 					"name": {
@@ -135,10 +195,12 @@
 						"example": "Oleks"
 					},
 					"email": {
-						"type": "string",
-						"description": "User's email",
-						"format": "email"
-					},
+                        "type": "string",
+                        "required": true,
+                        "description": "User's email",
+                        "pattern": "/^w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/",
+                        "example": "oleks@gmail.com"
+                    },
 					"avatarURL": {
 						"type": "string",
 						"description": "User's avatar URL",
@@ -146,14 +208,91 @@
 					}
 				}
 			},
-			"RegistrationResponse": {
+			"LoginRequest": {
 				"type": "object",
+				"required": ["email", "password"],
 				"properties": {
-					"user": {
-						"$ref": "#/components/schemas/registrationUserSchema"
+					"email": {
+						"type": "string",
+						"required": true,
+						"description": "User's email",
+						"format": "email",
+						"pattern": "/^w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/",
+						"example": "oleks@gmail.com"
+					},
+					"password": {
+						"type": "string",
+						"description": "User's password",
+						"minLength": "6",
+						"maxLength": "15",
+						"example": "qwerty123"
 					}
 				}
-			}
+			},
+			"LoginResponse": {
+				"type": "object",
+				"properties": {
+                    "token": {
+                        "type": "string",
+                        "required": true,
+                        "description": "User's authentitication token"
+                    },
+                    "user": {
+                        "type": "object",
+                        "properties": { 
+                            "name": {
+                                "type": "string",
+                                "description": "User's display name",
+                                "example": "Oleks"
+                            },
+                            "email": {
+                                "type": "string",
+                                "required": true,
+                                "description": "User's email",
+                                "pattern": "/^w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/",
+                                "example": "oleks@gmail.com"
+                            },
+                            "avatarURL": {
+							"type": "string",
+							"description": "User's avatar URL",
+							"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=250"
+							},
+                            "createdAt": {
+                                "type":"string",
+                                "description": "Date of creation",
+                                "format": "date"
+                            }
+                        }
+					}
+				}
+			},
+			"CurrentUserResponse": {
+                "type": "object",
+                "properties": { 
+                            "name": {
+                                "type": "string",
+                                "description": "User's display name",
+                                "example": "Oleks"
+                            },
+                            "email": {
+                                "type": "string",
+                                "required": true,
+                                "description": "User's email",
+                                "pattern": "/^w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/",
+                                "example": "oleks@gmail.com"
+                            },
+                            "avatarURL": {
+							"type": "string",
+							"description": "User's avatar URL",
+							"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=250"
+							},
+                            "createdAt": {
+                                "type":"string",
+                                "description": "Date of creation",
+                                "format": "date"
+                            }
+                }
+            }
 		},
 		"securitySchemes": {
 			"Bearer": {
@@ -161,6 +300,7 @@
 				"scheme": "bearer",
 				"bearerFormat": "JWT"
 			}
-		}
+		} 
 	}
 }
+
