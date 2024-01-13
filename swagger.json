@@ -73,14 +73,13 @@
 				}
 			}
 		},
-    "/auth/current": {
+		"/auth/current": {
 			"get": {
 				"tags": ["Auth"],
 				"summary": "current user information",
 				"parameters": [],
 				"security": [{ "Bearer": [] }],
-				"requestBody": {
-				},
+				"requestBody": {},
 				"responses": {
 					"200": {
 						"description": "OK",
@@ -89,7 +88,8 @@
 								"schema": {
 									"$ref": "#/components/schemas/RegistrationResponse"
 								}
-							}}
+							}
+						}
 					},
 					"401": {
 						"description": "Unauthorized",
@@ -97,8 +97,91 @@
 					}
 				}
 			}
+		},
+		"/food": {
+			"get": {
+				"tags": ["Food"],
+				"summary": "Get all foods",
+				"parameters": [
+					{
+						"name": "page",
+						"in": "path",
+						"schema": {
+							"type": "integer",
+							"example": "1"
+						}
+					},
+					{
+						"name": "limit",
+						"description": "Limit of elements per page",
+						"in": "path",
+						"schema": {
+							"type": "integer",
+							"example": "16"
+						}
+					}
+				],
+				"security": [{ "Bearer": [] }],
+				"requestBody": {},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/RegistrationResponse"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {}
+					},
+					"404": {
+						"description": "Not Found",
+						"content": {"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/RegistrationResponse"
+							}
+						}}
+					}
+				}
+			}
+		},
+		"/food/categories": {
+			"get": {
+				"tags": ["Food"],
+				"summary": "Get all categories",
+				"parameters": [],
+				"security": [{ "Bearer": [] }],
+				"requestBody": {},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/RegistrationResponse"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"content": {}
+					},
+					"404": {
+						"description": "Not Found",
+						"content": {"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/RegistrationResponse"
+							}
+						}}
+					}
+				}
+			}
 		}
-
 	},
 	"components": {
 		"schemas": {
