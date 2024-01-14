@@ -6,6 +6,6 @@ const router = express.Router();
 router.get("/", authenticate, ctrl.getAllExercises);
 router.get("/current/:exerciseId", authenticate, ctrl.getExerciseById);
 router.get("/filters", authenticate, ctrl.getAllFilters);
-router.get("/categories", ctrl.getFilterCategory);
+router.get("/categories", authenticate, ctrl.getFilterCategory);
 
 module.exports = router;

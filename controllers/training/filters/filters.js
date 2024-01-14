@@ -16,7 +16,7 @@ const getFilterCategory = async (req, res) => {
   }
   const data = await Filter.find({ filter: category }).skip(skip).limit(limit);
   const total = await Filter.countDocuments({ filter: category });
-  res.status(200).json({ total, limit, page, data });
+  res.status(200).json({ total, page, limit, data });
 };
 
 module.exports = { getAllFilters, getFilterCategory };
