@@ -26,13 +26,13 @@ const profileSchema = new Schema(
     currentWeight: {
       type: Number,
       required: [true, "Define current user weight"],
-      min: 40,
+      min: 35,
       max: 160,
     },
     desiredWeight: {
       type: Number,
       required: [true, "Define desired user weight"],
-      min: 40,
+      min: 35,
       max: 160,
     },
     sex: {
@@ -68,8 +68,8 @@ const Profile = model("profile", profileSchema);
 
 const createProfile = Joi.object({
   height: Joi.number().min(150).max(220).required(),
-  currentWeight: Joi.number().min(40).max(160).required(),
-  desiredWeight: Joi.number().min(40).max(160).required(),
+  currentWeight: Joi.number().min(35).max(160).required(),
+  desiredWeight: Joi.number().min(35).max(160).required(),
   sex: Joi.string()
     .valid(...sexType)
     .required(),

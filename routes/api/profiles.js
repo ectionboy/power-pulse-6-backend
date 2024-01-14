@@ -10,7 +10,6 @@ router.put(
   "/",
   authenticate,
   validateBody(schemas.createProfile),
-  profileCtrl.createProfile,
   profileCtrl.updateProfile,
   profileCtrl.createProfile
 );
