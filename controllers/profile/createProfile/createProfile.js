@@ -3,12 +3,11 @@ const { ctrlWrapper, calculateBmr } = require("../../../helpers");
 
 const creareProfile = async (req, res) => {
   const { _id: id } = req.user;
-  // console.log(req.body);
   const { height, currentWeight, sex, levelActivity, birthday } = req.body;
 
   let profile = await Profile.create({
     owner: id,
-    brm: calculateBmr(height, currentWeight, sex, levelActivity, birthday),
+    bmr: calculateBmr(height, currentWeight, sex, levelActivity, birthday),
     ...req.body,
   });
 
