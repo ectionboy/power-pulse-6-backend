@@ -2,14 +2,18 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
-// const { HttpError } = require("./helpers");
 const path = require("path");
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
 const authRouter = require("./routes/api/auth");
-// const foodRouter = require("./routes/api/food");
-// const trainingRouter = require("./routes/api/training");
+const userRouter = require("./routes/api/users");
+const foodRouter = require("./routes/api/food");
+const trainingRouter = require("./routes/api/training");
 // const diaryRouter = require("./routes/api/diary");
 const profileRouter = require("./routes/api/profiles");
+
 
 const STATIC_PATH = path.join(__dirname, "public");
 
@@ -23,11 +27,13 @@ app.use(express.json());
 app.use(express.static(STATIC_PATH));
 
 app.use("/api/auth", authRouter);
-// app.use("/food", foodRouter);
-// app.use("/training", trainingRouter);
+app.use("/api/users", userRouter);
+app.use("/api/food", foodRouter);
 // app.use("/diary", diaryRouter);
 app.use("/api/profiles", profileRouter);
+app.use("/api/exercises", trainingRouter);
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
