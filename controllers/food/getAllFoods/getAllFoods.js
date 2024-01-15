@@ -11,9 +11,9 @@ const getAllFoods = async (req, res) => {
 		const data = await Categories.findOne({ value: req.query.category });
 		if (!data) {
 			throw HttpError(400, "Unacceptable category");
-		};
+		}
 		filters.category = data.label;
-	};
+	}
 
 	if (req.query.groupBloodNotAllowed) {
 		const { _id: id } = req.user;
@@ -37,16 +37,22 @@ const getAllFoods = async (req, res) => {
 
 			default:
 				throw HttpError(400, "Unacceptable groupBloodNotAllowed");
-		};
+		}
 		filters = { ...filters, ...query };
-	};
+	}
+
+	if (req.query.search) {
+		const query = { title: { $regex: req.query.search, $options: "i" } };
+
+		filters = { ...filters, ...query };
+	}
 
 	const data = await Food.find(filters).skip(skip).limit(limit);
 	const total = await Food.countDocuments(filters);
 	if (!data) {
 		throw HttpError(404, "Foods not found");
 	}
-	res.status(200).json({ total, page, limit, data });
+	res.status(200).json({ total, page: +page, limit: +limit, data });
 };
 
 module.exports = {
