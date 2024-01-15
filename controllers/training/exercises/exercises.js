@@ -20,7 +20,7 @@ const getAllExercises = async (req, res) => {
   if (!data) {
     throw HttpError(404, "Exersises not found");
   }
-  res.status(200).json({ total, page, limit, data });
+  res.status(200).json({ total, page: +page, limit: +limit, data });
 };
 const getExerciseById = async (req, res) => {
   const { exerciseId } = req.params;
