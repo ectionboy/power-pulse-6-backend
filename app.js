@@ -11,7 +11,7 @@ const swaggerDocument = require('./swagger.json');
 const authRouter = require("./routes/api/auth");
 // const foodRouter = require("./routes/api/food");
 // const trainingRouter = require("./routes/api/training");
-// const diaryRouter = require("./routes/api/diary");
+const diaryRouter = require("./routes/api/diary");
 
 const STATIC_PATH = path.join(__dirname, "public");
 
@@ -27,7 +27,7 @@ app.use(express.static(STATIC_PATH));
 app.use("/api/auth", authRouter);
 // app.use("/food", foodRouter);
 // app.use("/training", trainingRouter);
-// app.use("/diary", diaryRouter);
+app.use("/diary", diaryRouter);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

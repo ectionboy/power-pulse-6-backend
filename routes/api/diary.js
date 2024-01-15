@@ -1,8 +1,12 @@
-const express = require("express");
-// const ctrl = require("../../controllers/diary/index");
+const express = require('express');
 const router = express.Router();
-// const { schemas } = require("../../models/diary");
+const diaryController = require('../../controllers/diary');
+const authenticate = require('../../middlewares/authenticate');
 
-// router.get(... , ctrl.register)
+router.post('/add-entry', authenticate, diaryController.addEntry);
+
+router.delete('/delete-entry', authenticate, diaryController.deleteEntry);
+
+router.get('/:userId/:date', authenticate, diaryController.getDiaryByDate);
 
 module.exports = router;
