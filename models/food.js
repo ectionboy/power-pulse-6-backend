@@ -6,22 +6,19 @@ const foodSchema = new Schema(
 		calories: Number,
 		category: String,
 		title: String,
-		groupBloodNotAllowed: [
-			{
-				1: Boolean,
-				2: Boolean,
-				3: Boolean,
-				4: Boolean,
-			},
-		],
+		groupBloodNotAllowed: {
+			1: Boolean,
+			2: Boolean,
+			3: Boolean,
+			4: Boolean,
+		},
 	},
 	{ timestamps: true, versionKey: false }
 );
 const categoriesSchema = new Schema(
 	{
 		label: String,
-		value: String
-
+		value: String,
 	},
 	{ timestamps: true, versionKey: false }
 );
@@ -29,8 +26,7 @@ const categoriesSchema = new Schema(
 const Food = model("product", foodSchema);
 const Categories = model("products-categorie", categoriesSchema);
 
-
 module.exports = {
 	Food,
-	Categories
+	Categories,
 };
