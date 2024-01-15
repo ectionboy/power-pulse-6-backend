@@ -20,6 +20,8 @@ const foodSchema = new Schema(
 const categoriesSchema = new Schema(
 	{
 		label: String,
+		value: String
+
 	},
 	{ timestamps: true, versionKey: false }
 );
