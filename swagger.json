@@ -340,6 +340,33 @@
 							"type": "integer",
 							"example": "16"
 						}
+					},
+					{
+						"name": "category",
+						"description": "Category of food",
+						"in": "path",
+						"schema": {
+							"type": "string",
+							"example": "vegetables-and-herbs"
+						}
+					},
+					{
+						"name": "groupBloodNotAllowed",
+						"description": "Blood group allowed filter",
+						"in": "path",
+						"schema": {
+							"type": "string",
+							"example": "not-recommended"
+						}
+					},
+					{
+						"name": "search",
+						"description": "Search",
+						"in": "path",
+						"schema": {
+							"type": "string",
+							"example": "Bonduelle"
+						}
 					}
 				],
 				"security": [{ "Bearer": [] }],
@@ -351,6 +378,16 @@
 							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/FoodResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CategoriesFoodResponse400"
 								}
 							}
 						}
@@ -1059,6 +1096,15 @@
 					"message": {
 						"type": "string",
 						"example": "Categories not found"
+					}
+				}
+			},
+			"CategoriesFoodResponse400": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string",
+						"example": "Unacceptable category"
 					}
 				}
 			},
