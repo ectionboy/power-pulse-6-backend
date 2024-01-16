@@ -27,7 +27,7 @@ app.use(express.static(STATIC_PATH));
 app.use("/api/auth", authRouter);
 // app.use("/food", foodRouter);
 // app.use("/training", trainingRouter);
-app.use("/diary", diaryRouter);
+app.use("/api/diary", diaryRouter);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

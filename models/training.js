@@ -1,36 +1,31 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require("mongoose");
 
-const exerciseSchema = new mongoose.Schema({
-    bodyPart: {
-        type: String,
-        required: true
+const exerciseSchema = new Schema(
+    {
+        bodyPart: String,
+        equipment: String,
+        gifUrl: String,
+        name: String,
+        target: String,
+        burnedCalories: Number,
+        time: Number,
     },
-    equipment: {
-        type: String,
-        required: true
-    },
-    gifUrl: {
-        type: String,
-        required: true
-    },
-    name: {
-        type: String,
-        required: true
-    },
-    target: {
-        type: String,
-        required: true
-    },
-    burnedCalories: {
-        type: Number,
-        required: true
-    },
-    time: {
-        type: Number,
-        required: true
-    }
-});
+    { timestamps: true, versionKey: false }
+);
 
-const Exercise = mongoose.model('Exercise', exerciseSchema, 'exercises');
+const filterSchema = new Schema(
+    {
+        filter: String,
+        name: String,
+        imgURL: String,
+    },
+    { timestamps: true, versionKey: false }
+);
 
-module.exports = Exercise;
+const Exercise = model("exercise", exerciseSchema);
+const Filter = model("filter", filterSchema);
+
+module.exports = {
+    Exercise,
+    Filter,
+};
