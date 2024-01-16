@@ -326,7 +326,7 @@
 				"parameters": [
 					{
 						"name": "page",
-						"in": "path",
+						"in": "query",
 						"schema": {
 							"type": "integer",
 							"example": "1"
@@ -335,7 +335,7 @@
 					{
 						"name": "limit",
 						"description": "Limit of elements per page",
-						"in": "path",
+						"in": "query",
 						"schema": {
 							"type": "integer",
 							"example": "16"
@@ -344,7 +344,7 @@
 					{
 						"name": "category",
 						"description": "Category of food",
-						"in": "path",
+						"in": "query",
 						"schema": {
 							"type": "string",
 							"example": "vegetables-and-herbs"
@@ -353,7 +353,7 @@
 					{
 						"name": "groupBloodNotAllowed",
 						"description": "Blood group allowed filter",
-						"in": "path",
+						"in": "query",
 						"schema": {
 							"type": "string",
 							"example": "not-recommended"
@@ -362,7 +362,7 @@
 					{
 						"name": "search",
 						"description": "Search",
-						"in": "path",
+						"in": "query",
 						"schema": {
 							"type": "string",
 							"example": "Bonduelle"
