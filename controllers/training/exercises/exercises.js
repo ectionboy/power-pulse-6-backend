@@ -7,13 +7,13 @@ const getAllExercises = async (req, res) => {
 
   const filters = {};
   if (req.query.bodyPart) {
-    filters.bodyPart = req.query.bodyPart;
+    filters.bodyPart = { $regex: req.query.bodyPart, $options: "i" };
   }
   if (req.query.equipment) {
-    filters.equipment = req.query.equipment;
+    filters.equipment = { $regex: req.query.equipment, $options: "i" };
   }
   if (req.query.target) {
-    filters.target = req.query.target;
+    filters.target = { $regex: req.query.target, $options: "i" };
   }
   const data = await Exercise.find(filters).skip(skip).limit(limit);
   const total = await Exercise.countDocuments(filters);
