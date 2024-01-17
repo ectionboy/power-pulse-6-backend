@@ -11,7 +11,7 @@ const authRouter = require("./routes/api/auth");
 const userRouter = require("./routes/api/users");
 const foodRouter = require("./routes/api/food");
 const trainingRouter = require("./routes/api/training");
-// const diaryRouter = require("./routes/api/diary");
+const diaryRouter = require("./routes/api/diary");
 const profileRouter = require("./routes/api/profiles");
 
 
@@ -29,7 +29,7 @@ app.use(express.static(STATIC_PATH));
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 app.use("/api/food", foodRouter);
-// app.use("/diary", diaryRouter);
+app.use("/api/diary", diaryRouter);
 app.use("/api/profiles", profileRouter);
 app.use("/api/exercises", trainingRouter);
 
