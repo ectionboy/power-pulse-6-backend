@@ -1,7 +1,10 @@
-// const { ctrlWrapper } = require("../../helpers");
-
-// const register = require("./register/register");
+const ctrlWrapper = require('../../helpers/ctrlWrapper');
+const addEntry = require('./addEntry/addEntry');
+const deleteEntry = require('./deleteEntry/deleteEntry');
+const getDiaryByDate = require('./getDiaryByDate/getDiaryByDate');
 
 module.exports = {
-	// register: ctrlWrapper(register),
+	addEntry: ctrlWrapper(addEntry),
+	deleteEntry: ctrlWrapper(deleteEntry),
+	getDiaryByDate: ctrlWrapper(getDiaryByDate)
 };
