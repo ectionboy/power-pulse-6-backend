@@ -29,6 +29,7 @@ const login = async (req, res) => {
       name: user.name,
       email: user.email,
       avatarURL: user.avatarURL,
+      avatarLargeURL: user.avatarLargeURL,
       createdAt: user.createdAt,
     },
   });
