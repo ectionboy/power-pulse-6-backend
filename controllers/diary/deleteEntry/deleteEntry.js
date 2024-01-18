@@ -2,7 +2,7 @@ const { Diary } = require('../../../models/diary');
 const HttpError = require('../../../helpers/HttpError');
 
 async function deleteEntry(req, res, next) {
-    const { userId, date, productEntryId, exerciseEntryId } = req.body;
+    const { userId, date, entryId } = req.body;
 
     try {
         const diary = await Diary.findOne({ user: userId, date });
@@ -11,22 +11,19 @@ async function deleteEntry(req, res, next) {
             throw HttpError(404, 'Diary entry not found');
         }
 
-        if (productEntryId && !diary.products.some(product => product._id.toString() === productEntryId)) {
-            throw HttpError(404, 'Product entry not found');
-        }
-
-        if (exerciseEntryId && !diary.exercises.some(exercise => exercise._id.toString() === exerciseEntryId)) {
-            throw HttpError(404, 'Exercise entry not found');
-        }
-
         const update = {};
-        if (productEntryId) {
-            update.$pull = { products: { _id: productEntryId } };
+        let found = false;
+
+        if (diary.products.some(product => product._id.toString() === entryId)) {
+            update.$pull = { products: { _id: entryId } };
+            found = true;
+        } else if (diary.exercises.some(exercise => exercise._id.toString() === entryId)) {
+            update.$pull = { exercises: { _id: entryId } };
+            found = true;
         }
 
-        if (exerciseEntryId) {
-            update.$pull = update.$pull || {};
-            update.$pull.exercises = { _id: exerciseEntryId };
+        if (!found) {
+            throw HttpError(404, 'Entry not found');
         }
 
         if (update.$pull) {
