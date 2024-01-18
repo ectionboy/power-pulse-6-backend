@@ -4,8 +4,11 @@ const dateToShortFormat = require('../../../helpers/dateToShortFormat');
 
 async function getDiaryByDate(req, res, next) {
     const { userId, date } = req.params;
-
+    const currentUserId = req.user.id;
     try {
+        if (userId !== currentUserId) {
+            throw HttpError(403, 'Access denied');
+        }
         const diary = await Diary.findOne({ user: userId, date })
             .populate({
                 path: 'products.productId',
