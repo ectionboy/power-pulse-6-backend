@@ -5,8 +5,11 @@ const HttpError = require('../../../helpers/HttpError');
 
 async function addEntry(req, res, next) {
     const { userId, date, productData, exerciseData } = req.body;
-
+    const currentUserId = req.user.id;
     try {
+        if (userId !== currentUserId) {
+            throw HttpError(403, 'Access denied');
+        }
         const diary = await Diary.findOneAndUpdate(
             { user: userId, date },
             { $setOnInsert: { user: userId, date } },
