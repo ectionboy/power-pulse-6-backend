@@ -9,7 +9,7 @@ const avatarStoragePath = path.join(__dirname, "../../../", "public", "avatars")
 
 const updateAvatar = async (req, res) => {
   const { path: tempAvatar, filename } = req.file;
-  await normalizeAvatar(tempAvatar, 250);
+  await normalizeAvatar(tempAvatar, 100);
   const { _id } = req.user;
   const avatarURL = path.join("avatars", filename);
   const avatarPath = path.join(avatarStoragePath, filename);
