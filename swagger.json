@@ -293,32 +293,6 @@
 				}
 			}
 		},
-		"/profiles/targets": {
-			"get": {
-				"tags": ["Profiles"],
-				"summary": "User's traning targets",
-				"security": [
-					{
-						"Bearer": []
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "Operation successful",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UserTargetsResponse"
-								}
-							}
-						}
-					},
-					"404": {
-						"description": "Not found"
-					}
-				}
-			}
-		},
 		"/{userId}/{date}": {
 			"get": {
 			  "tags": [
@@ -843,22 +817,32 @@
 			"registrationResponse": {
 				"type": "object",
 				"properties": {
-					"name": {
-						"type": "string",
-						"description": "User's name",
-						"example": "Oleks"
-					},
-					"email": {
+					"token": {
 						"type": "string",
 						"required": true,
-						"description": "User's email",
-						"pattern": "/^w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/",
-						"example": "oleks@gmail.com"
+						"description": "User's authentitication token"
 					},
-					"avatarURL": {
-						"type": "string",
-						"description": "User's avatar URL",
-						"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=250"
+					"user": {
+						"type": "object",
+						"properties": {
+							"name": {
+								"type": "string",
+								"description": "User's display name",
+								"example": "Oleks"
+							},
+							"email": {
+								"type": "string",
+								"required": true,
+								"description": "User's email",
+								"pattern": "/^w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/",
+								"example": "oleks@gmail.com"
+							},
+							"avatarURL": {
+								"type": "string",
+								"description": "User's avatar URL",
+								"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=250"
+							}
+						}
 					}
 				}
 			},
@@ -945,6 +929,14 @@
 						"type": "string",
 						"description": "Date of creation",
 						"format": "date"
+					},
+					"targetBmr": {
+						"type": "number",
+						"description": "User's target callories"
+					},
+					"targetTime": {
+						"type": "number",
+						"description": "User's target traning time"
 					}
 				}
 			},
@@ -1108,19 +1100,6 @@
 						"type": "null"
 					}
 				]
-			},
-			"UserTargetsResponse": {
-				"type": "object",
-				"properties": {
-					"targetBmr": {
-						"type": "number",
-						"description": "User's target callories"
-					},
-					"targetTime": {
-						"type": "number",
-						"description": "User's target traning time"
-					}
-				}
 			},
 			"DiaryResponse": {
 				"type": "object",
