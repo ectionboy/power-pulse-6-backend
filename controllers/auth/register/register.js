@@ -3,6 +3,8 @@ const gravatar = require("gravatar");
 
 const { User } = require("../../../models/user");
 const { HttpError, ctrlWrapper } = require("../../../helpers");
+const { SECRET_KEY } = process.env;
+const jwt = require("jsonwebtoken");
 
 const register = async (req, res) => {
   const { email, password } = req.body;
@@ -13,12 +15,23 @@ const register = async (req, res) => {
   }
   const avatarURL = gravatar.url(email, { s: "250", protocol: "http" });
   const hashPassword = await bcrypt.hash(password, 10);
+
   const newUser = await User.create({
     ...req.body,
     password: hashPassword,
     avatarURL,
   });
+
+  const payload = {
+    id: newUser._id,
+    createdAt: newUser.createdAt,
+  };
+  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
+
+  await User.findByIdAndUpdate(newUser._id, { token });
+
   res.status(201).json({
+    token,
     user: {
       name: newUser.name,
       email: newUser.email,
@@ -26,5 +39,7 @@ const register = async (req, res) => {
     },
   });
 };
+
+module.exports = ctrlWrapper(register);
 
 module.exports = ctrlWrapper(register);
