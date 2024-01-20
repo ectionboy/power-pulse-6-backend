@@ -3,7 +3,14 @@ const { ctrlWrapper, HttpError } = require("../../../helpers");
 
 const getCurrent = async (req, res) => {
   try {
-    const { _id: id, email, name, avatarURL, createdAt } = req.user;
+    const {
+      _id: id,
+      email,
+      name,
+      avatarURL,
+      avatarLargeURL,
+      createdAt,
+    } = req.user;
     const result = await Profile.findOne({ owner: id });
 
     let targetBmr = 0;
@@ -17,6 +24,7 @@ const getCurrent = async (req, res) => {
       name,
       email,
       avatarURL,
+      avatarLargeURL,
       createdAt,
       targetBmr,
       targetTime,
