@@ -1,5 +1,6 @@
 const fs = require("fs/promises");
 const path = require("path");
+const gravatar = require("gravatar");
 
 const { ctrlWrapper, normalizeAvatar } = require("../../../helpers");
 
@@ -10,13 +11,27 @@ const avatarStoragePath = path.join(__dirname, "../../../", "public", "avatars")
 const updateAvatar = async (req, res) => {
   const { path: tempAvatar, filename } = req.file;
   await normalizeAvatar(tempAvatar, 100);
-  const { _id } = req.user;
-  const avatarURL = path.join("avatars", filename);
+  const { _id, email } = req.user;
+  const avatarURL = await new Promise((resolve) => {
+    gravatar.url(email, { s: "250", protocol: "http" }, (err, url) => {
+      if (err) throw err;
+      resolve(url);
+    }); 
+  });
+  const avatarLargeURL = await new Promise((resolve) => {
+    gravatar.url(email, { s: "150", protocol: "http" }, (err, url) => {
+      if (err) throw err;
+      resolve(url);
+    });
+  });
+  await normalizeAvatar(tempAvatar, 100);
+
   const avatarPath = path.join(avatarStoragePath, filename);
   await fs.rename(tempAvatar, avatarPath);
-  await User.findByIdAndUpdate(_id, { avatarURL });
+  await User.findByIdAndUpdate(_id, { avatarURL, avatarLargeURL });
   res.status(200).json({
     avatarURL,
+    avatarLargeURL,
   });
 };
 
