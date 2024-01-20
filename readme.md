@@ -98,7 +98,7 @@ This project was made possible by the hard work and dedication of the following 
 
 - Ostap Re - Team Lead / Developer
   - [GitHub](https://github.com/ectionboy)
-  - [LinkedIn]()
+  - [LinkedIn](https://www.linkedin.com/in/ostap-revutskyi-1b809b297/)
 - Oleksandr Tsurkan - Key Developer
   - [GitHub](https://github.com/OleksandrTsurkan)
   - [LinkedIn](https://www.linkedin.com/in/oleksandr-tsurkan/)
