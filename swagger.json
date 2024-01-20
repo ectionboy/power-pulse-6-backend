@@ -39,7 +39,11 @@
 		{
 			"name": "Training",
 			"description": "Training endpoints"
-		}
+		},
+        {
+            "name": "Statistics",
+            "description": "Application statistics"
+        }
 	],
 
 	"paths": {
@@ -786,7 +790,30 @@
 					}
 				}
 			}
-		}
+		},
+		"/statistics": {
+            "get": {
+                "tags": [
+                    "Statistics"
+                ],
+                "summary": "Basic statistic",
+                "responses": {
+                    "200": {
+                        "description": "Operation successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BasicStatisticResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        }
 	},
 	"components": {
 		"schemas": {
@@ -840,7 +867,12 @@
 							"avatarURL": {
 								"type": "string",
 								"description": "User's avatar URL",
-								"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=250"
+								"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=50"
+							},
+							"avatarLargeURL": {
+								"type": "string",
+								"description": "User's avatar URL",
+								"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=200"
 							}
 						}
 					}
@@ -893,7 +925,12 @@
 							"avatarURL": {
 								"type": "string",
 								"description": "User's avatar URL",
-								"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=250"
+								"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=50"
+							},
+							"avatarLargeURL": {
+								"type": "string",
+								"description": "User's avatar URL",
+								"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=200"
 							},
 							"createdAt": {
 								"type": "string",
@@ -923,7 +960,12 @@
 					"avatarURL": {
 						"type": "string",
 						"description": "User's avatar URL",
-						"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=250"
+						"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=50"
+					},
+					"avatarLargeURL": {
+						"type": "string",
+						"description": "User's avatar URL",
+						"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=200"
 					},
 					"createdAt": {
 						"type": "string",
@@ -971,7 +1013,12 @@
 					"avatarURL": {
 						"type": "string",
 						"description": "User's avatar URL",
-						"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=250"
+						"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=50"
+					},
+					"avatarLargeURL": {
+						"type": "string",
+						"description": "User's avatar URL",
+						"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=200"
 					}
 				}
 			},
@@ -990,7 +1037,12 @@
 					"avatarURL": {
 						"type": "string",
 						"description": "User's avatar URL",
-						"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=250"
+						"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=50"
+					},
+					"avatarLargeURL": {
+						"type": "string",
+						"description": "User's avatar URL",
+						"example": "http://www.gravatar.com/avatar/e4102cc7a5201c8dd9f198cdcb3cfc6c?s=200"
 					}
 				}
 			},
@@ -1040,7 +1092,7 @@
 						"enum": [1, 2, 3, 4, 5]
 					},
 					"birthday": {
-						"type": "date",
+						"type": "string",
 						"description": "User's birthday",
 						"format": "date"
 					}
@@ -1082,7 +1134,7 @@
 								"enum": [1, 2, 3, 4, 5]
 							},
 							"birthday": {
-								"type": "date",
+								"type": "string",
 								"description": "User's birthday",
 								"format": "date"
 							},
@@ -1571,8 +1623,25 @@
 						"example": "Categories not found"
 					}
 				}
-			}
-		},
+			},
+			"BasicStatisticResponse": {
+                "type": "object",
+                "properties": {
+                    "userCount": {
+                        "type": "integer"
+                    },
+                    "workoutCount": {
+                        "type": "integer"
+                    },
+                    "burnedCaloriesSum": {
+                        "type": "number"
+                    },
+                    "workoutsTimeSum": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
 		"securitySchemes": {
 			"Bearer": {
 				"type": "http",
