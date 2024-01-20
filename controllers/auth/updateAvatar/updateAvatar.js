@@ -13,13 +13,13 @@ const updateAvatar = async (req, res) => {
   await normalizeAvatar(tempAvatar, 100);
   const { _id, email } = req.user;
   const avatarURL = await new Promise((resolve) => {
-    gravatar.url(email, { s: "250", protocol: "http" }, (err, url) => {
+    gravatar.url(email, { s: "50", protocol: "http" }, (err, url) => {
       if (err) throw err;
       resolve(url);
     }); 
   });
   const avatarLargeURL = await new Promise((resolve) => {
-    gravatar.url(email, { s: "150", protocol: "http" }, (err, url) => {
+    gravatar.url(email, { s: "2000", protocol: "http" }, (err, url) => {
       if (err) throw err;
       resolve(url);
     });

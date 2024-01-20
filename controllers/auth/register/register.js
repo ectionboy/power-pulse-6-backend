@@ -13,8 +13,8 @@ const register = async (req, res) => {
   if (user) {
     throw HttpError(409, "Email already in use");
   }
-  const avatarURL = gravatar.url(email, { s: "100", protocol: "http" });
-  const avatarLargeURL = gravatar.url(email, { s: "50", protocol: "http" });
+  const avatarURL = gravatar.url(email, { s: "50", protocol: "http" });
+  const avatarLargeURL = gravatar.url(email, { s: "200", protocol: "http" });
   const hashPassword = await bcrypt.hash(password, 10);
 
   const newUser = await User.create({
