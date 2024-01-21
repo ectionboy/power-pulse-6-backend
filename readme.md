@@ -96,11 +96,27 @@ The first opening may be long, because free render.com service is used for backe
 
 This project was made possible by the hard work and dedication of the following team members:
 
-- Ostap Re - Team Lead / Developer
+Backend:
+
+- Ostap Revutsky - Team Lead Backend / Developer
   - [GitHub](https://github.com/ectionboy)
   - [LinkedIn](https://www.linkedin.com/in/ostap-revutskyi-1b809b297/)
-- Oleksandr Tsurkan - Key Developer
+- Oleksandr Tsurkan - Key Backend Developer
   - [GitHub](https://github.com/OleksandrTsurkan)
   - [LinkedIn](https://www.linkedin.com/in/oleksandr-tsurkan/)
+- Denys Muratov - Backend Developer
+  - [GitHub](https://github.com/DenysVM)
+  - [LinkedIn](https://www.linkedin.com/in/denys-muratov)
+- Maryna Ozkara - Backend Developer
+  - [GitHub](https://github.com/MarynaOzkara)
+  - [LinkedIn](https://www.linkedin.com/in/maryna-ozkara/)
+Frontend:
+- Nazar Martsyniuk - Scrum Master
+  - [GitHub](https://github.com/Nazar0105)
+  - [LinkedIn](www.linkedin.com/in/nazar-marcyniuk)
+- Anatolii Klepach - Frontend Developer
+  - [GitHub](https://github.com/Chapelk1)
+  - [LinkedIn](https://www.linkedin.com/in/anatolii-klepach/)
+
 
 **A big thank you to our team for their contributions to this project!**
