@@ -297,7 +297,7 @@
 				}
 			}
 		},
-		"/{userId}/{date}": {
+		"/diary/{userId}/{date}": {
 			"get": {
 			  "tags": [
 				"Diary"
@@ -305,11 +305,7 @@
 			  "summary": "Get Diary by Date",
 			  "description": "Retrieve the diary entries for a specific user and date.",
 			  "operationId": "getDiaryByDate",
-			  "security": [
-				{
-				  "bearerAuth": []
-				}
-			  ],
+			  "security": [{ "Bearer": [] }],
 			  "parameters": [
 				{
 				  "name": "userId",
@@ -346,7 +342,7 @@
 			  }
 			}
 		  },
-		  "/add-entry": {
+		  "/diary/add-entry": {
 			"post": {
 			  "tags": [
 				"Diary"
@@ -354,11 +350,7 @@
 			  "summary": "Add Diary Entry",
 			  "description": "Add a new product or exercise entry to the user's diary.",
 			  "operationId": "addDiaryEntry",
-			  "security": [
-				{
-				  "bearerAuth": []
-				}
-			  ],
+			  "security": [{ "Bearer": [] }],
 			  "parameters": [
 				{
 				  "in": "body",
@@ -386,7 +378,7 @@
 			  }
 			}
 		  },
-		  "/delete-entry": {
+		  "/diary/delete-entry": {
 			"delete": {
 			  "tags": [
 				"Diary"
@@ -394,11 +386,7 @@
 			  "summary": "Delete Diary Entry",
 			  "description": "Delete a product or exercise entry from the user's diary.",
 			  "operationId": "deleteDiaryEntry",
-			  "security": [
-				{
-				  "bearerAuth": []
-				}
-			  ],
+			  "security": [{ "Bearer": [] }],
 			  "parameters": [
 				{
 				  "in": "body",
