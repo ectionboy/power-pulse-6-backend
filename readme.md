@@ -111,12 +111,21 @@ Backend:
   - [GitHub](https://github.com/MarynaOzkara)
   - [LinkedIn](https://www.linkedin.com/in/maryna-ozkara/)
 Frontend:
+- Serhii Sokolovskyi - Team Lead Frontend / Developer
+  - [GitHub](https://github.com/Sokilskill)
+  - [LinkedIn](https://www.linkedin.com/in/sergiisokolovskyi/)
 - Nazar Martsyniuk - Scrum Master
   - [GitHub](https://github.com/Nazar0105)
   - [LinkedIn](www.linkedin.com/in/nazar-marcyniuk)
 - Anatolii Klepach - Frontend Developer
   - [GitHub](https://github.com/Chapelk1)
   - [LinkedIn](https://www.linkedin.com/in/anatolii-klepach/)
+- Pavlo Lystopad - Frontend Developer
+  - [GitHub](https://github.com/Lyst67)
+  - [LinkedIn](https://www.linkedin.com/in/pavlo-lystopad/)
+- Tymur Qayoom - Frontend Developer
+  - [GitHub](https://github.com/TymQa)
+  - [LinkedIn](https://www.linkedin.com/in/tymurqayoom/)
 
 
 **A big thank you to our team for their contributions to this project!**
