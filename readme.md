@@ -96,11 +96,42 @@ The first opening may be long, because free render.com service is used for backe
 
 This project was made possible by the hard work and dedication of the following team members:
 
-- Ostap Re - Team Lead / Developer
+Backend:
+
+- Ostap Revutsky - Team Lead Backend / Developer
   - [GitHub](https://github.com/ectionboy)
   - [LinkedIn](https://www.linkedin.com/in/ostap-revutskyi-1b809b297/)
-- Oleksandr Tsurkan - Key Developer
+- Oleksandr Tsurkan - Key Backend Developer
   - [GitHub](https://github.com/OleksandrTsurkan)
   - [LinkedIn](https://www.linkedin.com/in/oleksandr-tsurkan/)
+- Denys Muratov - Backend Developer
+  - [GitHub](https://github.com/DenysVM)
+  - [LinkedIn](https://www.linkedin.com/in/denys-muratov)
+- Maryna Ozkara - Backend Developer
+  - [GitHub](https://github.com/MarynaOzkara)
+  - [LinkedIn](https://www.linkedin.com/in/maryna-ozkara/)
+Frontend:
+- Serhii Sokolovskyi - Team Lead Frontend / Developer
+  - [GitHub](https://github.com/Sokilskill)
+  - [LinkedIn](https://www.linkedin.com/in/sergiisokolovskyi/)
+- Nazar Martsyniuk - Scrum Master
+  - [GitHub](https://github.com/Nazar0105)
+  - [LinkedIn](www.linkedin.com/in/nazar-marcyniuk)
+- Anatolii Klepach - Frontend Developer
+  - [GitHub](https://github.com/Chapelk1)
+  - [LinkedIn](https://www.linkedin.com/in/anatolii-klepach/)
+- Pavlo Lystopad - Frontend Developer
+  - [GitHub](https://github.com/Lyst67)
+  - [LinkedIn](https://www.linkedin.com/in/pavlo-lystopad/)
+- Tymur Qayoom - Frontend Developer
+  - [GitHub](https://github.com/TymQa)
+  - [LinkedIn](https://www.linkedin.com/in/tymurqayoom/)
+- Vitaliya Ovechko - Frontend Developer
+  - [GitHub](https://github.com/VitaliyaOvechko)
+  - [LinkedIn](https://www.linkedin.com/in/vitaliya-%D0%BEvechko/)
+- Olha Poberezhna - Frontend Developer
+  - [GitHub](https://github.com/opoberezh)
+  - [LinkedIn](https://www.linkedin.com/in/olha-poberezhna/)
+
 
 **A big thank you to our team for their contributions to this project!**
