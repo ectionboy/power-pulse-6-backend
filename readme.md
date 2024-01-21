@@ -126,6 +126,9 @@ Frontend:
 - Tymur Qayoom - Frontend Developer
   - [GitHub](https://github.com/TymQa)
   - [LinkedIn](https://www.linkedin.com/in/tymurqayoom/)
+- Vitaliya Ovechko - Frontend Developer
+  - [GitHub](https://github.com/VitaliyaOvechko)
+  - [LinkedIn](https://www.linkedin.com/in/vitaliya-%D0%BEvechko/)
 
 
 **A big thank you to our team for their contributions to this project!**
