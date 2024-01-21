@@ -129,6 +129,9 @@ Frontend:
 - Vitaliya Ovechko - Frontend Developer
   - [GitHub](https://github.com/VitaliyaOvechko)
   - [LinkedIn](https://www.linkedin.com/in/vitaliya-%D0%BEvechko/)
+- Olha Poberezhna - Frontend Developer
+  - [GitHub](https://github.com/opoberezh)
+  - [LinkedIn](https://www.linkedin.com/in/olha-poberezhna/)
 
 
 **A big thank you to our team for their contributions to this project!**
