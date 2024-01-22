@@ -1714,6 +1714,9 @@
                     },
                     "workoutsTimeSum": {
                         "type": "number"
+                    },
+					"videoCount": {
+                        "type": "integer"
                     }
                 }
             }
