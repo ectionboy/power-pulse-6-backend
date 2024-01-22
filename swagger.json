@@ -749,6 +749,36 @@
 				}
 			}
 		},
+		"/exercises/filters": {
+			"get": {
+				"tags": ["Training"],
+				"summary": "Returns grouped categories",
+				"security": [{ "Bearer": [] }],
+				"requestBody": {},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ExercisesFilterResponse"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Exercise not found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ExerciseFilterErrorResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
 		"/exercises/categories": {
 			"get": {
 				"tags": ["Training"],
@@ -1565,6 +1595,52 @@
 				}
 			},
 			"CurrentExerciseErrorResponse": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string",
+						"example": "Exercise not found"
+					}
+				}
+			},
+			"ExercisesFilterResponse": {
+                "type": "object",
+                "description": "Total count of elements in filtered collection",
+                "properties": {
+                    "total": {
+                        "type": "integer"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "_id": {
+									"type": "string",
+									"description": "Exercise ID",
+									"example": "64f2458d6f67bc34bae4f7f7"
+								},
+                                "filter": {
+                                    "type": "string",
+									"description": "Filter category",
+									"example": "Body parts"
+                                },
+                                "name": {
+									"type": "string",
+									"description": "Exercise name",
+									"example": "assisted chest dip (kneeling)"
+								},
+                                "imgUrl": {
+									"type": "string",
+									"description": "URL to the example gif",
+									"example": "https://ftp.goit.study/img/power-pulse/gifs/0009.gif"
+								}
+                            }
+                        }
+                    }
+                }
+            },
+			"ExerciseFilterErrorResponse": {
 				"type": "object",
 				"properties": {
 					"message": {
