@@ -362,6 +362,13 @@
 				  }
 				}
 			  ],
+			  "requestBody": {
+					"description": "Diary entry to add (product or exercise)",
+					"required": true,
+					"content": {
+						"application/json": {}
+					}
+				},
 			  "responses": {
 				"200": {
 				  "description": "Diary entry successfully added"
