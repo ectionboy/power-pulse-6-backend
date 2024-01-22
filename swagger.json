@@ -966,6 +966,11 @@
 								"type": "string",
 								"description": "Date of creation",
 								"format": "date"
+							},
+							"isParams": {
+								"type": "boolean",
+      							"description": "Indicates whether the user has filled out their profile",
+      							"default": false
 							}
 						}
 					}
