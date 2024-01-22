@@ -132,6 +132,9 @@ Frontend:
 - Olha Poberezhna - Frontend Developer
   - [GitHub](https://github.com/opoberezh)
   - [LinkedIn](https://www.linkedin.com/in/olha-poberezhna/)
+- Demchenko Marianna - Frontend Developer
+  - [GitHub](https://github.com/Manja2012)
+  - [LinkedIn](https://www.linkedin.com/in/marianna-demchenko/)
 
 
 **A big thank you to our team for their contributions to this project!**
