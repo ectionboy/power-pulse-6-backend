@@ -351,24 +351,19 @@
 			  "description": "Add a new product or exercise entry to the user's diary.",
 			  "operationId": "addDiaryEntry",
 			  "security": [{ "Bearer": [] }],
-			  "parameters": [
-				{
-				  "in": "body",
-				  "name": "body",
-				  "description": "Diary entry to add (product or exercise)",
-				  "required": true,
-				  "schema": {
-					"$ref": "#/components/schemas/DiaryEntryRequest"
-				  }
-				}
-			  ],
+			  "parameters":[],
 			  "requestBody": {
-					"description": "Diary entry to add (product or exercise)",
-					"required": true,
-					"content": {
-						"application/json": {}
+				"description": "Diary entry to add (product or exercise)",
+				"required": true,
+				"content": {
+					"application/json": {
+						"schema": {
+							"$ref": "#/components/schemas/DiaryEntryRequest"
+						}
 					}
-				},
+				}
+			},
+			  
 			  "responses": {
 				"200": {
 				  "description": "Diary entry successfully added"
