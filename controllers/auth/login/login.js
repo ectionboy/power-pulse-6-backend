@@ -1,4 +1,5 @@
 const { User } = require("../../../models/user");
+const { Profile } = require("../../../models/profile");
 const bcrypt = require("bcrypt");
 const { SECRET_KEY } = process.env;
 const jwt = require("jsonwebtoken");
@@ -23,6 +24,9 @@ const login = async (req, res) => {
   const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
   await User.findByIdAndUpdate(user._id, { token });
 
+  const profile = await Profile.findOne({ owner: user._id });
+  const isParams = profile ? true : false;
+
   res.status(200).json({
     token,
     user: {
@@ -31,6 +35,7 @@ const login = async (req, res) => {
       avatarURL: user.avatarURL,
       createdAt: user.createdAt,
       avatarLargeURL: user.avatarLargeURL,
+      isParams: isParams,
     },
   });
 };
