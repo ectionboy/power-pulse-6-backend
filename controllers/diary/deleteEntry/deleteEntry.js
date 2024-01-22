@@ -2,7 +2,7 @@ const { Diary } = require('../../../models/diary');
 const HttpError = require('../../../helpers/HttpError');
 
 async function deleteEntry(req, res, next) {
-    const { userId, date, entryId } = req.params;
+    const { userId, date, entryId } = req.body;
     const currentUserId = req.user.id;
     try {
         if (userId !== currentUserId) {
