@@ -389,17 +389,18 @@
 			  "description": "Delete a product or exercise entry from the user's diary.",
 			  "operationId": "deleteDiaryEntry",
 			  "security": [{ "Bearer": [] }],
-			  "parameters": [
-				{
-				  "in": "body",
-				  "name": "body",
-				  "description": "Details of the diary entry to be deleted",
-				  "required": true,
-				  "schema": {
-					"$ref": "#/components/schemas/DeleteEntryRequest"
-				  }
-				}
-			  ],
+			  "parameters": [],
+			  "requestBody": {
+					"description": "Diary entry to add (product or exercise)",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/DiaryEntryRequest"
+							  }
+						}
+					}
+				},
 			  "responses": {
 				"200": {
 				  "description": "Diary entry successfully deleted"
