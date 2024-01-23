@@ -20,7 +20,7 @@ async function addEntry(req, res, next) {
                 throw HttpError(404, 'Product not found');
             }
 
-            const calories = (productData.amount / product.weight) * product.calories;
+            const calories = parseFloat((productData.amount / product.weight) * product.calories.toFixed(2));
             const updatedProductData = { ...productData, calories };
 
             await Diary.updateOne(
