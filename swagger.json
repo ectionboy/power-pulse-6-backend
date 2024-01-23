@@ -1300,17 +1300,12 @@
 				  }
 				}
 			  },
-			  "DiaryEntryRequest": {
+			"DiaryEntryRequest": {
 				"type": "object",
 				"required": [
-				  "userId",
 				  "date"
 				],
 				"properties": {
-				  "userId": {
-					"type": "string",
-					"description": "please use the Users ID from Profile "
-				  },
 				  "date": {
 					"type": "string",
 					"format": "date",
@@ -1325,7 +1320,7 @@
 					  },
 					  "amount": {
 						"type": "integer",
-						"example": "1"
+						"example": "12"
 					  }
 					}
 				  },
@@ -1338,37 +1333,12 @@
 					  },
 					  "time": {
 						"type": "integer",
-						"example": "1"
+						"example": "13"
 					  }
 					}
 				  }
 				}
-			  },
-			  "DeleteEntryRequest": {
-				"type": "object",
-				"required": [
-				  "userId",
-				  "date",
-				  "entryId"
-				],
-				"properties": {
-				  "userId": {
-					"type": "string",
-					"description": "please use the Users ID from Profile"
-				  },
-				  "date": {
-					"type": "string",
-					"format": "date",
-					"example": "2024-01-22",
-					"description": "please use the date when the exercise or product were added"
-				  },
-				  "entryId": {
-					"type": "string",
-					"example": "64f2458d6f67bc34bae4f80e",
-					"description": "please use the entryID for the exercise or product"
-				  }
-				}
-			  },
+			},
 			"FoodItemSchema": {
 				"type": "object",
 				"properties": {
