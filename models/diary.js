@@ -66,30 +66,20 @@ diarySchema.post('insertMany', handleMongooseError);
 const Diary = mongoose.model('Diary', diarySchema);
 
 const diaryEntrySchema = Joi.object({
-    userId: Joi.string().required(),
     date: Joi.string().required().pattern(/^\d{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))$/),
     productData: Joi.object({
         productId: Joi.string().required(),
         amount: Joi.number().min(1).required(),
-        // calories: Joi.number().min(1).required()
     }).optional(),
     exerciseData: Joi.object({
         exerciseId: Joi.string().required(),
         time: Joi.number().min(1).required(),
-        // burnedCalories: Joi.number().min(1).required()
     }).optional()
-});
-
-const deleteEntrySchema = Joi.object({
-    userId: Joi.string().required(),
-    date: Joi.string().required().pattern(/^\d{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))$/),
-    entryId: Joi.string().required()
 });
 
 module.exports = diaryEntrySchema;
 
 module.exports = {
     Diary,
-    diaryEntrySchema,
-    deleteEntrySchema
+    diaryEntrySchema
 };

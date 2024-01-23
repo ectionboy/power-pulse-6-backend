@@ -4,12 +4,12 @@ const diaryController = require('../../controllers/diary');
 const authenticate = require('../../middlewares/authenticate');
 const validateBody = require('../../middlewares/validateBody');
 
-const { diaryEntrySchema, deleteEntrySchema } = require('../../models/diary');
+const { diaryEntrySchema } = require('../../models/diary');
 
 router.post('/add-entry', authenticate, validateBody(diaryEntrySchema), diaryController.addEntry);
 
-router.delete('/delete-entry', authenticate, validateBody(deleteEntrySchema), diaryController.deleteEntry);
+router.delete('/delete-entry/:date/:entryId', authenticate, diaryController.deleteEntry);
 
-router.get('/:userId/:date', authenticate, diaryController.getDiaryByDate);
+router.get('/:date', authenticate, diaryController.getDiaryByDate);
 
 module.exports = router;

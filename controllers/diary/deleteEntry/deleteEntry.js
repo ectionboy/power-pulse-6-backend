@@ -2,12 +2,9 @@ const { Diary } = require('../../../models/diary');
 const HttpError = require('../../../helpers/HttpError');
 
 async function deleteEntry(req, res, next) {
-    const { userId, date, entryId } = req.body;
-    const currentUserId = req.user.id;
+    const { date, entryId } = req.params;
+    const userId = req.user.id;
     try {
-        if (userId !== currentUserId) {
-            throw HttpError(403, 'Access denied');
-        }
         const diary = await Diary.findOne({ user: userId, date });
 
         if (!diary) {
