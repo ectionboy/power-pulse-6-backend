@@ -8,14 +8,20 @@ const getAllFoods = async (req, res) => {
 
 	let filters = {};
 	if (req.query.category) {
-		const categoryQuery = req.query.category.replace(/-/g, ' ');
+		if (req.query.category !== "all") {
+			const categoryQuery = req.query.category.replace(/-/g, ' ');
 		filters.category = categoryQuery;
+		};
+		
 	}
 
 	if (req.query.groupBloodNotAllowed) {
 		const { _id: id } = req.user;
 
 		const result = await Profile.findOne({ owner: id });
+		if (!result) {
+			throw HttpError(404, "Profile not found");
+		}
 		const groupBlood = result.blood;
 
 		const query = {};
