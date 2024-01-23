@@ -1,5 +1,5 @@
 const { HttpError } = require("../../../helpers");
-const { Food, Categories } = require("../../../models/food");
+const { Food } = require("../../../models/food");
 const { Profile } = require("../../../models/profile");
 
 const getAllFoods = async (req, res) => {
@@ -8,11 +8,8 @@ const getAllFoods = async (req, res) => {
 
 	let filters = {};
 	if (req.query.category) {
-		const data = await Categories.findOne({ value: req.query.category });
-		if (!data) {
-			throw HttpError(400, "Unacceptable category");
-		}
-		filters.category = data.label;
+		const categoryQuery = req.query.category.replace(/-/g, ' ');
+		filters.category = categoryQuery;
 	}
 
 	if (req.query.groupBloodNotAllowed) {
