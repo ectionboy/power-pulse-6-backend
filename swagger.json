@@ -380,46 +380,62 @@
 			  }
 			}
 		  },
-		  "/diary/delete-entry": {
+		  "/diary/delete-entry/{userId}/{date}/{entryId}": {
 			"delete": {
-			  "tags": [
-				"Diary"
-			  ],
-			  "summary": "Delete Diary Entry",
-			  "description": "Delete a product or exercise entry from the user's diary.",
-			  "operationId": "deleteDiaryEntry",
-			  "security": [{ "Bearer": [] }],
-			  "parameters": [
-				{
-				  "in": "body",
-				  "name": "body",
-				  "description": "Details of the diary entry to be deleted",
-				  "required": true,
-				  "schema": {
-					"$ref": "#/components/schemas/DeleteEntryRequest"
-				  }
+				"tags": ["Diary"],
+				"summary": "Delete Diary Entry",
+				"description": "Delete a product or exercise entry from the user's diary.",
+				"operationId": "deleteDiaryEntry",
+				"security": [{ "Bearer": [] }],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						},
+						"description": "The ID of the user"
+					},
+					{
+						"in": "path",
+						"name": "date",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "date"
+						},
+						"description": "The date of the diary entry"
+					},
+					{
+						"in": "path",
+						"name": "entryId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						},
+						"description": "The ID of the diary entry to delete"
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Diary entry successfully deleted"
+					},
+					"400": {
+						"description": "Bad Request - Invalid request format"
+					},
+					"401": {
+						"description": "Unauthorized - Authentication is required"
+					},
+					"403": {
+						"description": "Access Denied - User is not authorized to delete entry"
+					},
+					"404": {
+						"description": "Not Found - Diary entry not found"
+					}
 				}
-			  ],
-			  "responses": {
-				"200": {
-				  "description": "Diary entry successfully deleted"
-				},
-				"400": {
-				  "description": "Bad Request - Invalid request format"
-				},
-				"401": {
-				  "description": "Unauthorized - Authentication is required"
-				},
-				"403": {
-				  "description": "Access Denied - User is not authorized to delete entry"
-				},
-				"404": {
-				  "description": "Not Found - Diary entry not found"
-				}
-			  }
 			}
-		  },
-		
+		},
 		"/food": {
 			"get": {
 				"tags": ["Food"],
