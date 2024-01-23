@@ -62,6 +62,10 @@ const profileSchema = new Schema(
       type: Number,
       default: 0,
     },
+    sportTime: {
+      type: Number,
+      default: 110,
+    },
   },
   { versionKey: false }
 );
