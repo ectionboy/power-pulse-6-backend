@@ -1311,20 +1311,24 @@
 				],
 				"properties": {
 				  "userId": {
-					"type": "string"
+					"type": "string",
+					"description": "please use the Users ID from Profile "
 				  },
 				  "date": {
 					"type": "string",
-					"format": "date"
+					"format": "date",
+					"example": "2024-01-22"
 				  },
 				  "productData": {
 					"type": "object",
 					"properties": {
 					  "productId": {
-						"type": "string"
+						"type": "string",
+						"example": "5d51694802b2373622ff563b"
 					  },
 					  "amount": {
-						"type": "integer"
+						"type": "integer",
+						"example": "1"
 					  }
 					}
 				  },
@@ -1332,10 +1336,12 @@
 					"type": "object",
 					"properties": {
 					  "exerciseId": {
-						"type": "string"
+						"type": "string",
+						"example": "64f2458d6f67bc34bae4f80e"
 					  },
 					  "time": {
-						"type": "integer"
+						"type": "integer",
+						"example": "1"
 					  }
 					}
 				  }
@@ -1350,14 +1356,19 @@
 				],
 				"properties": {
 				  "userId": {
-					"type": "string"
+					"type": "string",
+					"description": "please use the Users ID from Profile"
 				  },
 				  "date": {
 					"type": "string",
-					"format": "date"
+					"format": "date",
+					"example": "2024-01-22",
+					"description": "please use the date when the exercise or product were added"
 				  },
 				  "entryId": {
-					"type": "string"
+					"type": "string",
+					"example": "64f2458d6f67bc34bae4f80e",
+					"description": "please use the entryID for the exercise or product"
 				  }
 				}
 			  },

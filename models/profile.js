@@ -17,6 +17,10 @@ const profileSchema = new Schema(
       required: true,
       unique: true,
     },
+    name: {
+      type: String,
+      trim: true,
+    },
     height: {
       type: Number,
       min: 150,
@@ -67,6 +71,7 @@ profileSchema.post("save", handleMongooseError);
 const Profile = model("profile", profileSchema);
 
 const createProfile = Joi.object({
+  name: Joi.string().trim(),
   height: Joi.number().min(150).max(220).required(),
   currentWeight: Joi.number().min(35).max(160).required(),
   desiredWeight: Joi.number().min(35).max(160).required(),
