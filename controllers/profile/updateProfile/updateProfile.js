@@ -1,4 +1,5 @@
 const { Profile } = require("../../../models/profile");
+const { User } = require("../../../models/user");
 const {
   ctrlWrapper,
   dateToShortFormat,
@@ -13,7 +14,8 @@ const updateProfile = async (req, res, next) => {
     next();
     return;
   }
-  const { height, currentWeight, sex, levelActivity, birthday } = req.body;
+  const { height, currentWeight, sex, levelActivity, birthday, name } =
+    req.body;
   profile = await Profile.findByIdAndUpdate(
     profile._id,
     {
@@ -24,9 +26,34 @@ const updateProfile = async (req, res, next) => {
       new: true,
     }
   ).populate("owner", "name, email avatarUrl");
-  res.json({
-    profile,
-  });
+  if (name) {
+    const user = await User.findByIdAndUpdate(
+      id,
+      { name: name },
+      { new: true }
+    );
+    profile.owner = user;
+  }
+
+  const response = {
+    owner: {
+      _id: profile.owner._id,
+      name: profile.owner.name,
+      email: profile.owner.email,
+      avatarURL: profile.owner.avatarURL,
+    },
+    height: profile.height,
+    currentWeight: profile.currentWeight,
+    desiredWeight: profile.desiredWeight,
+    sex: profile.sex,
+    blood: profile.blood,
+    levelActivity: profile.levelActivity,
+    birthday: profile.birthday,
+    bmr: profile.bmr,
+    // _id: profile._id,
+  };
+
+  res.json(response);
 };
 
 module.exports = ctrlWrapper(updateProfile);
