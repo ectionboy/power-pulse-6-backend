@@ -351,19 +351,19 @@
 			  "description": "Add a new product or exercise entry to the user's diary.",
 			  "operationId": "addDiaryEntry",
 			  "security": [{ "Bearer": [] }],
-			  "parameters": [
-			  ],
+			  "parameters":[],
 			  "requestBody": {
-					"description": "Diary entry to add (product or exercise)",
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/DiaryEntryRequest"
-							  }
+				"description": "Diary entry to add (product or exercise)",
+				"required": true,
+				"content": {
+					"application/json": {
+						"schema": {
+							"$ref": "#/components/schemas/DiaryEntryRequest"
 						}
 					}
-				},
+				}
+			},
+			  
 			  "responses": {
 				"200": {
 				  "description": "Diary entry successfully added"
@@ -380,62 +380,46 @@
 			  }
 			}
 		  },
-"/diary/delete-entry/{userId}/{date}/{entryId}": {
-    "delete": {
-      "tags": ["Diary"],
-      "summary": "Delete Diary Entry",
-      "description": "Delete a product or exercise entry from the user's diary.",
-      "operationId": "deleteDiaryEntry",
-      "security": [{"Bearer": []}],
-      "parameters": [
-        {
-          "in": "path",
-          "name": "userId",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "The ID of the user"
-        },
-        {
-          "in": "path",
-          "name": "date",
-          "required": true,
-          "schema": {
-            "type": "string",
-            "format": "date"
-          },
-          "description": "The date of the diary entry"
-        },
-        {
-          "in": "path",
-          "name": "entryId",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "The ID of the diary entry to delete"
-        }
-      ],
-      "responses": {
-        "204": {
-          "description": "Diary entry successfully deleted"
-        },
-        "400": {
-          "description": "Bad Request - Invalid request format"
-        },
-        "401": {
-          "description": "Unauthorized - Authentication is required"
-        },
-        "403": {
-          "description": "Access Denied - User is not authorized to delete entry"
-        },
-        "404": {
-          "description": "Not Found - Diary entry not found"
-        }
-      }
-    }
-  },
+		  "/diary/delete-entry": {
+			"delete": {
+			  "tags": [
+				"Diary"
+			  ],
+			  "summary": "Delete Diary Entry",
+			  "description": "Delete a product or exercise entry from the user's diary.",
+			  "operationId": "deleteDiaryEntry",
+			  "security": [{ "Bearer": [] }],
+			  "parameters": [],
+			  "requestBody": {
+					"description": "Diary entry to add (product or exercise)",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/DiaryEntryRequest"
+							  }
+						}
+					}
+				},
+			  "responses": {
+				"200": {
+				  "description": "Diary entry successfully deleted"
+				},
+				"400": {
+				  "description": "Bad Request - Invalid request format"
+				},
+				"401": {
+				  "description": "Unauthorized - Authentication is required"
+				},
+				"403": {
+				  "description": "Access Denied - User is not authorized to delete entry"
+				},
+				"404": {
+				  "description": "Not Found - Diary entry not found"
+				}
+			  }
+			}
+		  },
 		
 		"/food": {
 			"get": {
@@ -756,6 +740,36 @@
 				}
 			}
 		},
+		"/exercises/filters": {
+			"get": {
+				"tags": ["Training"],
+				"summary": "Returns grouped categories",
+				"security": [{ "Bearer": [] }],
+				"requestBody": {},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ExercisesFilterResponse"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Exercise not found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ExerciseFilterErrorResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
 		"/exercises/categories": {
 			"get": {
 				"tags": ["Training"],
@@ -943,6 +957,11 @@
 								"type": "string",
 								"description": "Date of creation",
 								"format": "date"
+							},
+							"isParams": {
+								"type": "boolean",
+      							"description": "Indicates whether the user has filled out their profile",
+      							"default": false
 							}
 						}
 					}
@@ -1580,6 +1599,52 @@
 					}
 				}
 			},
+			"ExercisesFilterResponse": {
+                "type": "object",
+                "description": "Total count of elements in filtered collection",
+                "properties": {
+                    "total": {
+                        "type": "integer"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "_id": {
+									"type": "string",
+									"description": "Exercise ID",
+									"example": "64f2458d6f67bc34bae4f7f7"
+								},
+                                "filter": {
+                                    "type": "string",
+									"description": "Filter category",
+									"example": "Body parts"
+                                },
+                                "name": {
+									"type": "string",
+									"description": "Exercise name",
+									"example": "assisted chest dip (kneeling)"
+								},
+                                "imgUrl": {
+									"type": "string",
+									"description": "URL to the example gif",
+									"example": "https://ftp.goit.study/img/power-pulse/gifs/0009.gif"
+								}
+                            }
+                        }
+                    }
+                }
+            },
+			"ExerciseFilterErrorResponse": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string",
+						"example": "Exercise not found"
+					}
+				}
+			},
 			"CategoriesResponse": {
 				"type": "object",
 				"properties": {
@@ -1645,6 +1710,9 @@
                     },
                     "workoutsTimeSum": {
                         "type": "number"
+                    },
+					"videoCount": {
+                        "type": "integer"
                     }
                 }
             }

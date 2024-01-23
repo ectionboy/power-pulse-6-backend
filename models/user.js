@@ -33,6 +33,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    isParams: {
+      type: Boolean,
+      default: false,
+    },
   },
   { versionKey: false, timestamps: true }
 );
