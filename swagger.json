@@ -1096,6 +1096,10 @@
 					"birthday"
 				],
 				"properties": {
+					"name": {
+      					"type": "string",
+      					"description": "User's name (optional)"
+    				},
 					"height": {
 						"type": "number",
 						"description": "User's height",
@@ -1141,8 +1145,9 @@
 					{
 						"type": "object",
 						"properties": {
-							"_id": {
-								"type": "string"
+							"owner": {
+								"type": "object",
+								"$ref": "#/components/schemas/UpdateUserResponse"
 							},
 							"height": {
 								"type": "number",
@@ -1180,9 +1185,9 @@
 								"type": "number",
 								"description": "Callories of the user"
 							},
-							"owner": {
-								"type": "object",
-								"$ref": "#/components/schemas/UpdateUserResponse"
+							"sportTime": {
+								"type": "number",
+								"description": "Sporttime of the user"
 							}
 						}
 					},
