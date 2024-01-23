@@ -8,9 +8,24 @@ const getProfile = async (req, res) => {
     "owner",
     "name email avatarUrl"
   );
-  res.json({
-    result,
-  });
+  const response = {
+    owner: {
+      _id: result.owner._id,
+      name: result.owner.name,
+      email: result.owner.email,
+      avatarURL: result.owner.avatarURL,
+    },
+    height: result.height,
+    currentWeight: result.currentWeight,
+    desiredWeight: result.desiredWeight,
+    sex: result.sex,
+    blood: result.blood,
+    levelActivity: result.levelActivity,
+    birthday: result.birthday,
+    bmr: result.bmr,
+  };
+
+  res.json(response);
 };
 
 module.exports = ctrlWrapper(getProfile);

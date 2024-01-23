@@ -18,8 +18,14 @@ const updateProfile = async (req, res, next) => {
     next();
     return;
   }
-  const { height, currentWeight, sex, levelActivity, birthday, name } =
-    req.body;
+  const {
+    height,
+    currentWeight,
+    sex,
+    levelActivity,
+    birthday,
+    name,
+  } = req.body;
   profile = await Profile.findByIdAndUpdate(
     profile._id,
     {

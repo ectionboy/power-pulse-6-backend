@@ -11,9 +11,29 @@ const creareProfile = async (req, res) => {
     ...req.body,
   });
 
-  profile = await profile.populate("owner", "name email avatarURL");
+  profile = await Profile.findById(profile._id)
+    .populate("owner", "name email avatarURL");
+    // .select("-id");
 
-  res.json(profile);
+  const response = {
+    owner: {
+      _id: profile.owner._id,
+      name: profile.owner.name,
+      email: profile.owner.email,
+      avatarURL: profile.owner.avatarURL,
+    },
+    height: profile.height,
+    currentWeight: profile.currentWeight,
+    desiredWeight: profile.desiredWeight,
+    sex: profile.sex,
+    blood: profile.blood,
+    levelActivity: profile.levelActivity,
+    birthday: profile.birthday,
+    bmr: profile.bmr,
+    // _id: profile._id,
+  };
+
+  res.json(response);
 };
 
 module.exports = ctrlWrapper(creareProfile);
