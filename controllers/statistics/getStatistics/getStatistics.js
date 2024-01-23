@@ -1,7 +1,7 @@
-const { ctrlWrapper } = require("../../helpers");
-const { User } = require("../../models/user");
-const { Exercise } = require("../../models/training");
-const { Diary } = require("../../models/diary");
+const { ctrlWrapper } = require("../../../helpers");
+const { User } = require("../../../models/user");
+const { Exercise } = require("../../../models/training");
+const { Diary } = require("../../../models/diary");
 
 const getStatistics = async (req, res) => {
   const aggregationPipeline = [
