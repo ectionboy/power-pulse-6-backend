@@ -297,145 +297,142 @@
 				}
 			}
 		},
-		"/diary/{userId}/{date}": {
-			"get": {
-			  "tags": [
-				"Diary"
-			  ],
-			  "summary": "Get Diary by Date",
-			  "description": "Retrieve the diary entries for a specific user and date.",
-			  "operationId": "getDiaryByDate",
-			  "security": [{ "Bearer": [] }],
-			  "parameters": [
-				{
-				  "name": "userId",
-				  "in": "path",
-				  "required": true,
-				  "description": "Unique identifier of the user",
-				  "type": "string"
-				},
-				{
-				  "name": "date",
-				  "in": "path",
-				  "required": true,
-				  "description": "The date for which diary entries are requested in YYYY-MM-DD format",
-				  "type": "string",
-				  "format": "date"
-				}
-			  ],
-			  "responses": {
-				"200": {
-				  "description": "Diary entries for the specified date",
-				  "schema": {
-					"$ref": "#/components/schemas/DiaryResponse"
-				  }
-				},
-				"401": {
-				  "description": "Unauthorized - Authentication is required"
-				},
-				"403": {
-				  "description": "Access Denied - User is not authorized to view this diary entry"
-				},
-				"404": {
-				  "description": "Not Found - Diary entries not found for the specified user and date"
-				}
-			  }
-			}
-		  },
-		  "/diary/add-entry": {
-			"post": {
-			  "tags": [
-				"Diary"
-			  ],
-			  "summary": "Add Diary Entry",
-			  "description": "Add a new product or exercise entry to the user's diary.",
-			  "operationId": "addDiaryEntry",
-			  "security": [{ "Bearer": [] }],
-			  "parameters":[],
-			  "requestBody": {
-				"description": "Diary entry to add (product or exercise)",
-				"required": true,
-				"content": {
-					"application/json": {
-						"schema": {
-							"$ref": "#/components/schemas/DiaryEntryRequest"
-						}
-					}
-				}
-			},
-			  
-			  "responses": {
-				"200": {
-				  "description": "Diary entry successfully added"
-				},
-				"400": {
-				  "description": "Bad Request - Invalid request format"
-				},
-				"401": {
-				  "description": "Unauthorized - Authentication is required"
-				},
-				"403": {
-				  "description": "Access Denied - User is not authorized to add entry"
-				}
-			  }
-			}
-		  },
-		  "/diary/delete-entry/{userId}/{date}/{entryId}": {
-			"delete": {
-				"tags": ["Diary"],
-				"summary": "Delete Diary Entry",
-				"description": "Delete a product or exercise entry from the user's diary.",
-				"operationId": "deleteDiaryEntry",
-				"security": [{ "Bearer": [] }],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "userId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						},
-						"description": "The ID of the user"
-					},
-					{
-						"in": "path",
-						"name": "date",
-						"required": true,
-						"schema": {
-							"type": "string",
-							"format": "date"
-						},
-						"description": "The date of the diary entry"
-					},
-					{
-						"in": "path",
-						"name": "entryId",
-						"required": true,
-						"schema": {
-							"type": "string"
-						},
-						"description": "The ID of the diary entry to delete"
-					}
-				],
-				"responses": {
-					"204": {
-						"description": "Diary entry successfully deleted"
-					},
-					"400": {
-						"description": "Bad Request - Invalid request format"
-					},
-					"401": {
-						"description": "Unauthorized - Authentication is required"
-					},
-					"403": {
-						"description": "Access Denied - User is not authorized to delete entry"
-					},
-					"404": {
-						"description": "Not Found - Diary entry not found"
-					}
-				}
-			}
-		},
+    	"/diary/{date}": {
+        "get": {
+            "tags": [
+                "Diary"
+            ],
+            "summary": "Get Diary by Date",
+            "description": "Retrieve the diary entries for a authenticated user and date.",
+            "operationId": "getDiaryByDate",
+            "security": [
+                {
+                    "Bearer": []
+                }
+            ],
+            "parameters": [
+                {
+                    "name": "date",
+                    "in": "path",
+                    "required": true,
+                    "description": "The date for which diary entries are requested in YYYY-MM-DD format.",
+                    "type": "string",
+                    "format": "date"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Diary entries for the specified date",
+                    "schema": {
+                        "$ref": "#/components/schemas/DiaryResponse"
+                    }
+                },
+                "401": {
+                    "description": "Unauthorized - Authentication is required"
+                },
+                "403": {
+                    "description": "Access Denied - User is not authorized to view this diary entry"
+                },
+                "404": {
+                    "description": "Not Found - Diary entries not found for the specified user and date"
+                }
+            }
+        }
+    	},
+    	"/diary/add-entry": {
+        "post": {
+            "tags": [
+                "Diary"
+            ],
+            "summary": "Add Diary Entry",
+            "description": "Add a new product or exercise entry to the user's diary.",
+            "operationId": "addDiaryEntry",
+            "security": [
+                {
+                    "Bearer": []
+                }
+            ],
+            "parameters": [],
+            "requestBody": {
+                "description": "Diary entry to add (product or exercise)",
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/DiaryEntryRequest"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "Diary entry successfully added"
+                },
+                "400": {
+                    "description": "Bad Request - Invalid request format"
+                },
+                "401": {
+                    "description": "Unauthorized - Authentication is required"
+                },
+                "403": {
+                    "description": "Access Denied - User is not authorized to add entry"
+                }
+            }
+        }
+    	},
+    	"/diary/delete-entry/{date}/{entryId}": {
+        "delete": {
+            "tags": [
+                "Diary"
+            ],
+            "summary": "Delete Diary Entry",
+            "description": "Delete a product or exercise entry from the user's diary.",
+            "operationId": "deleteDiaryEntry",
+            "security": [
+                {
+                    "Bearer": []
+                }
+            ],
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "date",
+                    "required": true,
+                    "schema": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "description": "The date of the diary entry"
+                },
+                {
+                    "in": "path",
+                    "name": "entryId",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "description": "The ID of the diary entry to delete"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "Diary entry successfully deleted"
+                },
+                "400": {
+                    "description": "Bad Request - Invalid request format"
+                },
+                "401": {
+                    "description": "Unauthorized - Authentication is required"
+                },
+                "403": {
+                    "description": "Access Denied - User is not authorized to delete entry"
+                },
+                "404": {
+                    "description": "Not Found - Diary entry not found"
+                }
+            }
+        }
+    	},
 		"/food": {
 			"get": {
 				"tags": ["Food"],
