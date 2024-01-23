@@ -6,7 +6,7 @@ const getProfile = async (req, res) => {
 
   const result = await Profile.findOne({ owner: id }).populate(
     "owner",
-    "name email avatarUrl"
+    "name email avatarURL avatarLargeURL"
   );
   const response = {
     owner: {
@@ -14,6 +14,7 @@ const getProfile = async (req, res) => {
       name: result.owner.name,
       email: result.owner.email,
       avatarURL: result.owner.avatarURL,
+      largeAvatarURL: result.owner.avatarLargeURL,
     },
     height: result.height,
     currentWeight: result.currentWeight,
@@ -23,6 +24,7 @@ const getProfile = async (req, res) => {
     levelActivity: result.levelActivity,
     birthday: result.birthday,
     bmr: result.bmr,
+    sportTime: result.sportTime,
   };
 
   res.json(response);
