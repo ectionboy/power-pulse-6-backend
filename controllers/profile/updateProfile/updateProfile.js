@@ -8,7 +8,11 @@ const {
 
 const updateProfile = async (req, res, next) => {
   const { _id: id } = req.user;
-  req.body.birhday = dateToShortFormat(req.body.birhday);
+  if (!req.body.birthday) {
+    req.body.birthday = new Date();
+  } else {
+    req.body.birthday = dateToShortFormat(req.body.birthday);
+  }
   let profile = await Profile.findOne({ owner: id });
   if (!profile) {
     next();
@@ -25,12 +29,12 @@ const updateProfile = async (req, res, next) => {
     {
       new: true,
     }
-  ).populate("owner", "name, email avatarUrl");
+  ).populate("owner", "_id name email avatarUrl");
   if (name) {
     const user = await User.findByIdAndUpdate(
       id,
       { name: name },
-      { new: true }
+      { new: true, projection: "_id name email avatarURL" }
     );
     profile.owner = user;
   }
