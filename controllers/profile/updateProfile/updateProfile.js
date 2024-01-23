@@ -35,12 +35,12 @@ const updateProfile = async (req, res, next) => {
     {
       new: true,
     }
-  ).populate("owner", "_id name email avatarUrl");
+  ).populate("owner", "_id name email avatarUrl avatarLargeURL");
   if (name) {
     const user = await User.findByIdAndUpdate(
       id,
       { name: name },
-      { new: true, projection: "_id name email avatarURL" }
+      { new: true, projection: "_id name email avatarURL avatarLargeURL" }
     );
     profile.owner = user;
   }
@@ -51,6 +51,7 @@ const updateProfile = async (req, res, next) => {
       name: profile.owner.name,
       email: profile.owner.email,
       avatarURL: profile.owner.avatarURL,
+      largeAvatarURL: profile.owner.avatarLargeURL,
     },
     height: profile.height,
     currentWeight: profile.currentWeight,
@@ -60,7 +61,7 @@ const updateProfile = async (req, res, next) => {
     levelActivity: profile.levelActivity,
     birthday: profile.birthday,
     bmr: profile.bmr,
-    // _id: profile._id,
+    sportTime: profile.sportTime,
   };
 
   res.json(response);
