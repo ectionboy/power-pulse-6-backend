@@ -110,6 +110,7 @@ Backend:
 - Maryna Ozkara - Backend Developer
   - [GitHub](https://github.com/MarynaOzkara)
   - [LinkedIn](https://www.linkedin.com/in/maryna-ozkara/)
+
 Frontend:
 - Serhii Sokolovskyi - Team Lead Frontend / Developer
   - [GitHub](https://github.com/Sokilskill)
