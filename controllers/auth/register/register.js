@@ -44,5 +44,3 @@ const register = async (req, res) => {
 };
 
 module.exports = ctrlWrapper(register);
-
-module.exports = ctrlWrapper(register);
