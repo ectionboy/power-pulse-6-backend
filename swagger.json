@@ -1300,45 +1300,75 @@
 				  }
 				}
 			  },
-			"DiaryEntryRequest": {
-        "type": "object",
-        "required": [
-            "date"
-        ],
-        "properties": {
-            "date": {
-                "type": "string",
-                "format": "date",
-                "example": "2024-01-22"
-            },
-            "productData": {
-                "type": "object",
-                "properties": {
-                    "productId": {
-                        "type": "string",
-                        "example": "5d51694902b2373622ff5b7f"
-                    },
-                    "amount": {
-                        "type": "integer",
-                        "example": "10"
-                    }
-                }
-            },
-            "exerciseData": {
-                "type": "object",
-                "properties": {
-                    "exerciseId": {
-                        "type": "string",
-                        "example": "64f2458d6f67bc34bae4f81e"
-                    },
-                    "time": {
-                        "type": "integer",
-                        "example": "10"
-                    }
-                }
-            }
-        }
-    		},
+			  "DiaryEntryRequest": {
+				"type": "object",
+				"required": [
+				  "userId",
+				  "date"
+				],
+				"properties": {
+				  "userId": {
+					"type": "string",
+					"description": "please use the Users ID from Profile "
+				  },
+				  "date": {
+					"type": "string",
+					"format": "date",
+					"example": "2024-01-22"
+				  },
+				  "productData": {
+					"type": "object",
+					"properties": {
+					  "productId": {
+						"type": "string",
+						"example": "5d51694802b2373622ff563b"
+					  },
+					  "amount": {
+						"type": "integer",
+						"example": "1"
+					  }
+					}
+				  },
+				  "exerciseData": {
+					"type": "object",
+					"properties": {
+					  "exerciseId": {
+						"type": "string",
+						"example": "64f2458d6f67bc34bae4f80e"
+					  },
+					  "time": {
+						"type": "integer",
+						"example": "1"
+					  }
+					}
+				  }
+				}
+			  },
+			  "DeleteEntryRequest": {
+				"type": "object",
+				"required": [
+				  "userId",
+				  "date",
+				  "entryId"
+				],
+				"properties": {
+				  "userId": {
+					"type": "string",
+					"description": "please use the Users ID from Profile"
+				  },
+				  "date": {
+					"type": "string",
+					"format": "date",
+					"example": "2024-01-22",
+					"description": "please use the date when the exercise or product were added"
+				  },
+				  "entryId": {
+					"type": "string",
+					"example": "64f2458d6f67bc34bae4f80e",
+					"description": "please use the entryID for the exercise or product"
+				  }
+				}
+			  },
 			"FoodItemSchema": {
 				"type": "object",
 				"properties": {

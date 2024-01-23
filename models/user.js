@@ -58,21 +58,14 @@ const emailRequest = Joi.object({
   email: Joi.string().pattern(patterns.email).required(),
 });
 
-// const updatePassword = Joi.object({
-//   token: Joi.string().required(),
-//   password: Joi.string().min(6).max(24).required(),
-// });
-
 const updateUser = Joi.object({
   name: Joi.string(),
-  // email: Joi.string().pattern(patterns.email),
 });
 
 const schemas = {
   registerSchema,
   loginSchema,
   emailRequest,
-  // updatePassword,
   updateUser,
 };
 
