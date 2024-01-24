@@ -12,7 +12,7 @@ const getCurrent = async (req, res) => {
       createdAt,
     } = req.user;
     const result = await Profile.findOne({ owner: id });
-
+    const isParams = result ? true : false;
     let targetBmr = 0;
     const targetTime = 110;
 
@@ -28,6 +28,7 @@ const getCurrent = async (req, res) => {
       createdAt,
       targetBmr,
       targetTime,
+      isParams,
     });
   } catch (error) {
     console.error(error);
