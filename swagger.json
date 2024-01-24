@@ -257,7 +257,7 @@
 						}
 					},
 					"404": {
-						"description": "Not found"
+						"description": "Profile not found"
 					}
 				}
 			},

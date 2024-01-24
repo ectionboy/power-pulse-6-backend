@@ -8,6 +8,9 @@ const getProfile = async (req, res) => {
     "owner",
     "name email avatarURL avatarLargeURL"
   );
+  if (!result) {
+    return res.status(404).json({ error: "Profile not found" });
+  }
   const response = {
     owner: {
       _id: result.owner._id,
