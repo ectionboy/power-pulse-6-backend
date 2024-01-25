@@ -36,7 +36,7 @@ async function addEntry(req, res, next) {
                 throw HttpError(404, 'Exercise not found');
             }
 
-            const burnedCalories = parseFloat((exerciseData.time / exercise.time * exercise.burnedCalories).toFixed(2));
+            const burnedCalories = parseFloat((exerciseData.time* exercise.burnedCalories) / 180).toFixed(2);
             const updatedExerciseData = { ...exerciseData, burnedCalories };
 
             await Diary.updateOne(
