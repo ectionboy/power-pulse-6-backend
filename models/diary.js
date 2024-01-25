@@ -33,7 +33,8 @@ const diarySchema = new Schema({
             type: Number,
             required: true,
             min: 1
-        }
+        },
+
     }],
     exercises: [{
         exerciseId: {
@@ -70,6 +71,7 @@ const diaryEntrySchema = Joi.object({
     productData: Joi.object({
         productId: Joi.string().required(),
         amount: Joi.number().min(1).required(),
+        recommend: Joi.boolean(),
     }).optional(),
     exerciseData: Joi.object({
         exerciseId: Joi.string().required(),
