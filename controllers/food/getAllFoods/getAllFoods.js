@@ -28,11 +28,11 @@ const getAllFoods = async (req, res) => {
 
 		switch (req.query.groupBloodNotAllowed) {
 			case "recommended":
-				query[`groupBloodNotAllowed.${groupBlood}`] = true;
+				query[`groupBloodNotAllowed.${groupBlood}`] = false;
 				break;
 
 			case "not-recommended":
-				query[`groupBloodNotAllowed.${groupBlood}`] = false;
+				query[`groupBloodNotAllowed.${groupBlood}`] = true;
 				break;
 
 			case "all":
