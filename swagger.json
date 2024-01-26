@@ -297,48 +297,49 @@
 				}
 			}
 		},
-    	"/diary/{date}": {
-        "get": {
-            "tags": [
-                "Diary"
-            ],
-            "summary": "Get Diary by Date",
-            "description": "Retrieve the diary entries for a authenticated user and date.",
-            "operationId": "getDiaryByDate",
-            "security": [
-                {
-                    "Bearer": []
-                }
-            ],
-            "parameters": [
-                {
-                    "name": "date",
-                    "in": "path",
-                    "required": true,
-                    "description": "The date for which diary entries are requested in YYYY-MM-DD format.",
-                    "type": "string",
-                    "format": "date"
-                }
-            ],
-            "responses": {
-                "200": {
-                    "description": "Diary entries for the specified date",
-                    "schema": {
-                        "$ref": "#/components/schemas/DiaryResponse"
-                    }
-                },
-                "401": {
-                    "description": "Unauthorized - Authentication is required"
-                },
-                "403": {
-                    "description": "Access Denied - User is not authorized to view this diary entry"
-                },
-                "404": {
-                    "description": "Not Found - Diary entries not found for the specified user and date"
-                }
-            }
+		"/diary/{date}": {
+  "get": {
+    "tags": ["Diary"],
+    "summary": "Get Diary by Date",
+    "description": "Retrieve the diary entries for an authenticated user and date.",
+    "operationId": "getDiaryByDate",
+    "security": [
+      {
+        "Bearer": []
+      }
+    ],
+    "parameters": [
+      {
+        "name": "date",
+        "in": "path",
+        "required": true,
+        "description": "The date for which diary entries are requested in YYYY-MM-DD format.",
+        "schema": {
+          "type": "string",
+          "format": "date"
         }
-    	},
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Diary entries for the specified date or an empty diary if no entries are found.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/DiaryResponse"
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized - Authentication is required."
+      },
+      "403": {
+        "description": "Access Denied - User is not authorized to view this diary entry."
+      }
+    }
+  }
+		},
     	"/diary/add-entry": {
         "post": {
             "tags": [
@@ -1202,114 +1203,126 @@
 				]
 			},
 			"DiaryResponse": {
-				"type": "object",
-				"properties": {
-				  "diary": {
-					"type": "object",
-					"properties": {
-					  "_id": {
-						"type": "string"
-					  },
-					  "date": {
-						"type": "string",
-						"format": "date"
-					  },
-					  "user": {
-						"type": "string"
-					  },
-					  "__v": {
-						"type": "integer"
-					  },
-					  "exercises": {
-						"type": "array",
-						"items": {
-						  "$ref": "#/components/schemas/Exercise"
-						}
-					  },
-					  "products": {
-						"type": "array",
-						"items": {
-						  "$ref": "#/components/schemas/Product"
-						}
-					  }
-					}
-				  }
-				}
-			  },
-			  "Exercise": {
-				"type": "object",
-				"properties": {
-				  "exerciseId": {
-					"type": "object",
-					"properties": {
-					  "_id": {
-						"type": "string"
-					  },
-					  "bodyPart": {
-						"type": "string"
-					  },
-					  "equipment": {
-						"type": "string"
-					  },
-					  "name": {
-						"type": "string"
-					  },
-					  "target": {
-						"type": "string"
-					  },
-					  "burnedCalories": {
-						"type": "integer"
-					  },
-					  "time": {
-						"type": "integer"
-					  }
-					}
-				  },
-				  "time": {
-					"type": "integer"
-				  },
-				  "burnedCalories": {
-					"type": "number"
-				  },
-				  "_id": {
-					"type": "string"
-				  }
-				}
-			  },
-			  "Product": {
-				"type": "object",
-				"properties": {
-				  "productId": {
-					"type": "object",
-					"properties": {
-					  "_id": {
-						"type": "string"
-					  },
-					  "weight": {
-						"type": "integer"
-					  },
-					  "calories": {
-						"type": "integer"
-					  },
-					  "category": {
-						"type": "string"
-					  },
-					  "title": {
-						"type": "string"
-					  }
-					}
-				  },
-				  "amount": {
-					"type": "integer"
-				  },
-				  "calories": {
-					"type": "number"
-				  },
-				  "_id": {
-					"type": "string"
-				  }
-				}
-			  },
+  "type": "object",
+  "properties": {
+    "diary": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "user": {
+          "type": "string"
+        },
+        "__v": {
+          "type": "integer"
+        },
+        "exercises": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "exerciseId": {
+                "$ref": "#/components/schemas/ExerciseId"
+              },
+              "time": {
+                "type": "integer"
+              },
+              "burnedCalories": {
+                "type": "number"
+              },
+              "_id": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "productId": {
+                "$ref": "#/components/schemas/ProductId"
+              },
+              "amount": {
+                "type": "number"
+              },
+              "calories": {
+                "type": "number"
+              },
+              "_id": {
+                "type": "string"
+              },
+              "recommend": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+			},
+			"ExerciseId": {
+  "type": "object",
+  "properties": {
+    "_id": {
+      "type": "string"
+    },
+    "bodyPart": {
+      "type": "string"
+    },
+    "equipment": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "target": {
+      "type": "string"
+    },
+    "burnedCalories": {
+      "type": "integer"
+    },
+    "time": {
+      "type": "integer"
+    }
+  }
+			},
+			"ProductId": {
+  "type": "object",
+  "properties": {
+    "groupBloodNotAllowed": {
+      "type": "object",
+      "properties": {
+        "1": { "type": "boolean" },
+        "2": { "type": "boolean" },
+        "3": { "type": "boolean" },
+        "4": { "type": "boolean" }
+      }
+    },
+    "_id": {
+      "type": "string"
+    },
+    "weight": {
+      "type": "integer"
+    },
+    "calories": {
+      "type": "integer"
+    },
+    "category": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+			},
 			"DiaryEntryRequest": {
 				"type": "object",
 				"required": [
